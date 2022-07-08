@@ -64,6 +64,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		let tabBar = UITabBarController()
 		tabBar.viewControllers = [mainNC(), myBankNC(), transactionNC(), paymentNC(), menuNC()]
 		UITabBar.appearance().tintColor = #colorLiteral(red: 0.9400814772, green: 0.3291375041, blue: 0.1390302777, alpha: 1)
+		tabBar.tabBar.layer.borderWidth = 1.5
+		tabBar.tabBar.layer.borderColor = UIColor.systemGray6.cgColor
+		tabBar.tabBar.clipsToBounds = true
 		return tabBar
 	}
 

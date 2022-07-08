@@ -14,6 +14,8 @@
 		310B00AB287832A500A3BC17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 310B00A9287832A500A3BC17 /* LaunchScreen.storyboard */; };
 		310B00B52878330400A3BC17 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B00B42878330400A3BC17 /* Model.swift */; };
 		644BB6942878448200FDAC0D /* MyBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB6932878448200FDAC0D /* MyBankViewController.swift */; };
+		644BB69628785F4900FDAC0D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB69528785F4900FDAC0D /* InfoView.swift */; };
+		644BB6982878799100FDAC0D /* MyBankScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB6972878799100FDAC0D /* MyBankScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		310B00AC287832A500A3BC17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		310B00B42878330400A3BC17 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		644BB6932878448200FDAC0D /* MyBankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBankViewController.swift; sourceTree = "<group>"; };
+		644BB69528785F4900FDAC0D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		644BB6972878799100FDAC0D /* MyBankScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBankScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 		310B00B72878332A00A3BC17 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				644BB69528785F4900FDAC0D /* InfoView.swift */,
+				644BB6972878799100FDAC0D /* MyBankScrollView.swift */,
 				310B00A9287832A500A3BC17 /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -176,7 +182,9 @@
 				310B009F287832A400A3BC17 /* AppDelegate.swift in Sources */,
 				310B00A1287832A400A3BC17 /* SceneDelegate.swift in Sources */,
 				644BB6942878448200FDAC0D /* MyBankViewController.swift in Sources */,
+				644BB69628785F4900FDAC0D /* InfoView.swift in Sources */,
 				310B00B52878330400A3BC17 /* Model.swift in Sources */,
+				644BB6982878799100FDAC0D /* MyBankScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
