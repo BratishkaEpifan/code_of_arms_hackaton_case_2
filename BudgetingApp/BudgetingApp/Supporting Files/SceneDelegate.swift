@@ -13,11 +13,59 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+		window = UIWindow(windowScene: windowScene)
+		window?.rootViewController = createTabBar()
+		window?.makeKeyAndVisible()
     }
+	
+	func mainNC() -> UINavigationController {
+		let mainVC = UIViewController()
+		mainVC.view.backgroundColor = .systemBackground
+		let image = UIImage(systemName: "house.fill")
+		mainVC.tabBarItem = UITabBarItem(title: "главная", image: image, tag: 0)
+		let navVC =  UINavigationController(rootViewController: mainVC)
+		return navVC
+	}
+	
+	func myBankNC() -> UINavigationController {
+		let mybankVC = MyBankViewController()
+		mybankVC.view.backgroundColor = .systemBackground
+		let icon = UIImage(systemName: "creditcard.fill")
+		mybankVC.tabBarItem = UITabBarItem(title: "мой банк", image: icon, tag: 1)
+		return UINavigationController(rootViewController: mybankVC)
+	}
+	
+	func transactionNC() -> UINavigationController {
+		let mybankVC = UIViewController()
+		mybankVC.view.backgroundColor = .systemBackground
+		let image = UIImage(systemName: "arrow.left.arrow.right.square.fill")
+		mybankVC.tabBarItem = UITabBarItem(title: "переводы", image: image, tag: 2)
+		return UINavigationController(rootViewController: mybankVC)
+	}
+	
+	func paymentNC() -> UINavigationController {
+		let mybankVC = UIViewController()
+		mybankVC.view.backgroundColor = .systemBackground
+		let image = UIImage(systemName: "arrow.right.square.fill")
+		mybankVC.tabBarItem = UITabBarItem(title: "платежи", image: image, tag: 3)
+		return UINavigationController(rootViewController: mybankVC)
+	}
+	
+	func menuNC() -> UINavigationController {
+		let mybankVC = UIViewController()
+		mybankVC.view.backgroundColor = .systemBackground
+		let image = UIImage(systemName: "command.square.fill")
+		mybankVC.tabBarItem = UITabBarItem(title: "меню", image: image, tag: 4)
+		return UINavigationController(rootViewController: mybankVC)
+	}
+	
+	func createTabBar() -> UITabBarController {
+		let tabBar = UITabBarController()
+		tabBar.viewControllers = [mainNC(), myBankNC(), transactionNC(), paymentNC(), menuNC()]
+		UITabBar.appearance().tintColor = #colorLiteral(red: 0.9400814772, green: 0.3291375041, blue: 0.1390302777, alpha: 1)
+		return tabBar
+	}
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
