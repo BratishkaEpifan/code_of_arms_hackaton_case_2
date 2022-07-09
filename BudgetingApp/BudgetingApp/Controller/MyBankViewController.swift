@@ -8,6 +8,8 @@
 import UIKit
 
 class MyBankViewController: UIViewController {
+    
+    let button = UIButton()
 
 	let scrollView = MyBankScrollView()
     
@@ -16,7 +18,7 @@ class MyBankViewController: UIViewController {
 		view.backgroundColor = .systemBackground
 		configureNC()
 		configure()
-    }
+	}
 
 	func configureNC() {
 		let personImage = UIImage(systemName: "person.circle.fill")
