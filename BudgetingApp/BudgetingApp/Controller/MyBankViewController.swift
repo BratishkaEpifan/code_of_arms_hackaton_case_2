@@ -10,9 +10,9 @@ import UIKit
 class MyBankViewController: UIViewController {
 
 	let scrollView: UIScrollView = MyBankScrollView()
-    	
+		
 	override func viewDidLoad() {
-        super.viewDidLoad()
+		super.viewDidLoad()
 		view.backgroundColor = .systemBackground
 		configureNC()
 		configure()
