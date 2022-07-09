@@ -38,12 +38,6 @@ class MyBankViewController: UIViewController {
 	}
 	
     @objc func doNothing() {}
-	
-    @objc func buttonPressed() {
-        let mainVC = TabBarViewController()
-        mainVC.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(mainVC, animated: true)
-    }
     
 	func configure() {
 		view.addSubview(scrollView)
@@ -54,13 +48,7 @@ class MyBankViewController: UIViewController {
 			scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
 		])
-		
-        view.addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        button.backgroundColor = .red
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    
 	}
     
     
