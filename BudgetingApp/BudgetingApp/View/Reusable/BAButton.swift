@@ -1,17 +1,18 @@
 //
-//  InfoView.swift
+//  BAButton.swift
 //  BudgetingApp
 //
-//  Created by Aidyn Assan on 08.07.2022.
+//  Created by Aidyn Assan on 09.07.2022.
 //
 
 import UIKit
 
-class InfoView: UIView {
-	
+class BAButton: UIButton {
+
 	let infoImageView: UIImageView = {
 		let imageView = UIImageView()
-		imageView.layer.cornerRadius = 10
+		imageView.layer.masksToBounds = true
+		imageView.layer.cornerRadius = 30
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		return imageView
 	}()
@@ -26,7 +27,6 @@ class InfoView: UIView {
 	let midLabel: UILabel = {
 		let label = UILabel()
 		label.font = .systemFont(ofSize: 20)
-		
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
@@ -41,13 +41,26 @@ class InfoView: UIView {
 	}()
 	
 	override init(frame: CGRect) {
-		super .init(frame: frame)
+		super.init(frame: frame)
 		translatesAutoresizingMaskIntoConstraints = false
-		configure()
 	}
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+	
+	init(imageTitle: String, topText: String, midText: String, bottomText: String) {
+		super.init(frame: .zero)
+		translatesAutoresizingMaskIntoConstraints = false
+		infoImageView.image = UIImage(named: imageTitle)
+		topLabel.text = topText
+		midLabel.text = midText
+		bottomLabel.text = bottomText
+	}
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		configure()
 	}
 	
 	func configure() {

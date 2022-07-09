@@ -10,34 +10,33 @@ import UIKit
 class MyBankScrollView: UIScrollView {
 	
 	let view = UIView()
-
-	let bonusView: InfoView = {
-		let infoView = InfoView()
-		infoView.infoImageView.image = UIImage(named: "bonus")
-		infoView.topLabel.text = "Бонусы 2 %"
-		infoView.midLabel.text = "3890 Б"
-		infoView.bottomLabel.text = "Максимальный уровень\n ...................................................................."
-		return infoView
+	
+	var budgetButton: BAButton = {
+		let button = BAButton(imageTitle: "persent",
+							  topText: "Ваши расходы",
+							  midText: "-123141 ₸",
+							  bottomText: "Ожидания: 130000 ₸")
+		button.translatesAutoresizingMaskIntoConstraints = false
+		button.addTarget(MyBankScrollView.self, action: #selector(goToApp), for: .touchUpInside)
+		return button
 	}()
 	
-	let sectionTitleLabel: UILabel = {
-		let label = UILabel()
-		label.text = "Карты"
-		label.textColor = .systemGray
-		label.font = .boldSystemFont(ofSize: 24)
-		label.translatesAutoresizingMaskIntoConstraints = false
-		return label
-	}()
+	@objc func goToApp() {
+		print("Tapped app button!")
+	}
+		  
+	let bonusView = BAView(imageTitle: "bonus",
+						   topText: "Бонусы 2 %",
+						   midText: "3890 Б",
+						   bottomText: "Максимальный уровень\n ....................................................................")
 	
-	let cardView: InfoView = {
-		let infoView = InfoView()
-		infoView.infoImageView.image = UIImage(named: "card")
-		infoView.topLabel.text = "Платежная карта •3333"
-		infoView.midLabel.text = "573890 ₸"
-		infoView.bottomLabel.text = "в блоке 750 ₸"
-		return infoView
-	}()
+	let sectionTitleLabel = BALabel(text: "Карты")
 	
+	let cardView = BAView(imageTitle: "card",
+						  topText: "Платежная карта •3333",
+						  midText: "573890 ₸",
+						  bottomText: "в блоке 750 ₸")
+		
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		translatesAutoresizingMaskIntoConstraints = false
@@ -48,11 +47,22 @@ class MyBankScrollView: UIScrollView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+
+	
 	func configure() {
+		showsVerticalScrollIndicator = false
 		view.translatesAutoresizingMaskIntoConstraints = false
+		view.addSubview(budgetButton)
+		NSLayoutConstraint.activate([
+			budgetButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+			budgetButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+			budgetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+			budgetButton.heightAnchor.constraint(equalToConstant: 100)
+		])
+		
 		view.addSubview(bonusView)
 		NSLayoutConstraint.activate([
-			bonusView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+			bonusView.topAnchor.constraint(equalTo: budgetButton.bottomAnchor, constant: 10),
 			bonusView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
 			bonusView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
 			bonusView.heightAnchor.constraint(equalToConstant: 100)

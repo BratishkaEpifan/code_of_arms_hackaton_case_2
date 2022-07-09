@@ -8,11 +8,9 @@
 import UIKit
 
 class MyBankViewController: UIViewController {
-    
-    let button = UIButton()
 
-	let scrollView = MyBankScrollView()
-    
+	let scrollView: UIScrollView = MyBankScrollView()
+    	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		view.backgroundColor = .systemBackground
@@ -24,11 +22,11 @@ class MyBankViewController: UIViewController {
 		let personImage = UIImage(systemName: "person.circle.fill")
 		let button = UIBarButtonItem(image: personImage,
 									 style: .plain,
-									 target: nil, action: #selector(doNothing))
+									 target: self, action: #selector(doNothing))
 		let bellImage = UIImage(systemName: "bell")
 		let buttonN = UIBarButtonItem(image: bellImage,
 									  style: .plain,
-									  target: nil, action: #selector(doNothing))
+									  target: self, action: #selector(doNothing))
 		let searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 270, height: 20))
 		searchBar.placeholder = "Поиск в Jusan"
 		let leftNavBarButton = UIBarButtonItem(customView:searchBar)
@@ -36,7 +34,11 @@ class MyBankViewController: UIViewController {
 		navigationItem.rightBarButtonItems = [button, buttonN]
 		navigationItem.leftBarButtonItem = leftNavBarButton
 	}
-	@objc func doNothing() {}
+	@objc func doNothing() {
+		let vc = UIViewController()
+		vc.view.backgroundColor = .systemPink
+		navigationController?.pushViewController(vc, animated: true)
+	}
 	
 	func configure() {
 		view.addSubview(scrollView)
@@ -47,6 +49,6 @@ class MyBankViewController: UIViewController {
 			scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
 		])
-		
 	}
 }
+
