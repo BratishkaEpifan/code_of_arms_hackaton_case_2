@@ -7,7 +7,13 @@
 
 import UIKit
 
-class MyBankScrollView: UIScrollView {
+protocol GoToAppDelegate: AnyObject {
+	func goToApp() -> Void
+}
+
+class MyBankView: UIView {
+	
+	weak var goToAppDelegate: GoToAppDelegate?
 	
 	let view = UIView()
 	
@@ -17,12 +23,12 @@ class MyBankScrollView: UIScrollView {
 							  midText: "-123141 ₸",
 							  bottomText: "Ожидания: 130000 ₸")
 		button.translatesAutoresizingMaskIntoConstraints = false
-		button.addTarget(MyBankScrollView.self, action: #selector(goToApp), for: .touchUpInside)
+		button.addTarget(self, action: #selector(goToApp), for: .touchUpInside)
 		return button
 	}()
 	
 	@objc func goToApp() {
-		print("Tapped app button!")
+		goToAppDelegate?.goToApp()
 	}
 		  
 	let bonusView = BAView(imageTitle: "bonus",
@@ -50,40 +56,37 @@ class MyBankScrollView: UIScrollView {
 
 	
 	func configure() {
-		showsVerticalScrollIndicator = false
-		view.translatesAutoresizingMaskIntoConstraints = false
-		view.addSubview(budgetButton)
+		translatesAutoresizingMaskIntoConstraints = false
+		addSubview(budgetButton)
 		NSLayoutConstraint.activate([
-			budgetButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-			budgetButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-			budgetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+			budgetButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+			budgetButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+			budgetButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
 			budgetButton.heightAnchor.constraint(equalToConstant: 100)
 		])
 		
-		view.addSubview(bonusView)
+		addSubview(bonusView)
 		NSLayoutConstraint.activate([
 			bonusView.topAnchor.constraint(equalTo: budgetButton.bottomAnchor, constant: 10),
-			bonusView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-			bonusView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+			bonusView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+			bonusView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
 			bonusView.heightAnchor.constraint(equalToConstant: 100)
 		])
 		
-		view.addSubview(sectionTitleLabel)
+		addSubview(sectionTitleLabel)
 		NSLayoutConstraint.activate([
 			sectionTitleLabel.topAnchor.constraint(equalTo: bonusView.bottomAnchor, constant: 20),
-			sectionTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-			sectionTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+			sectionTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+			sectionTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
 			sectionTitleLabel.heightAnchor.constraint(equalToConstant: 40)
 		])
 
-		view.addSubview(cardView)
+		addSubview(cardView)
 		NSLayoutConstraint.activate([
 			cardView.topAnchor.constraint(equalTo: sectionTitleLabel.bottomAnchor, constant: 20),
-			cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-			cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+			cardView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+			cardView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
 			cardView.heightAnchor.constraint(equalToConstant: 100)
 		])
-		
-		addSubview(view)
 	}
 }

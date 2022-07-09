@@ -7,9 +7,9 @@
 
 import UIKit
 
-class MyBankViewController: UIViewController {
+class MyBankViewController: UIViewController, GoToAppDelegate {
 
-	let scrollView: UIScrollView = MyBankScrollView()
+	let myBankView = MyBankView()
 		
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,6 +34,12 @@ class MyBankViewController: UIViewController {
 		navigationItem.rightBarButtonItems = [button, buttonN]
 		navigationItem.leftBarButtonItem = leftNavBarButton
 	}
+	func goToApp() {
+		let vc = TabBarViewController()
+		vc.hidesBottomBarWhenPushed = true
+		navigationController?.pushViewController(vc, animated: true)
+	}
+
 	@objc func doNothing() {
 		let vc = UIViewController()
 		vc.view.backgroundColor = .systemPink
@@ -41,13 +47,13 @@ class MyBankViewController: UIViewController {
 	}
 	
 	func configure() {
-		view.addSubview(scrollView)
-		scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height-70)
+		myBankView.goToAppDelegate = self
+		view.addSubview(myBankView)
 		NSLayoutConstraint.activate([
-			scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-			scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-			scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-			scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+			myBankView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+			myBankView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			myBankView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+			myBankView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
 		])
 	}
 }
