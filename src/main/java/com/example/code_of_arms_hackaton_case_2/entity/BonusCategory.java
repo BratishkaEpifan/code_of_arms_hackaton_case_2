@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 
 
 public enum BonusCategory {
+
+    NONE,
     CINEMA_AND_MUSIC, //15%
     GAMES, //10%
     BEAUTY_AND_COSMETICS, //7%
@@ -15,6 +17,5 @@ public enum BonusCategory {
     RESTAURANTS, //5%
     TAXI, //5%
     TRAVEL, //5%
-    FITNESS, //5%
-    NONE;
+    FITNESS; //5%
 }

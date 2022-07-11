@@ -21,6 +21,7 @@ public class UserService {
 
         BonusCountEntity bonusCountEntity = new BonusCountEntity();
         bonusCountEntity.setBankUser(bankUser);
+        bonusCountEntity.setCurrentBonus(0.0);
         bonusCountEntity.setBeautyAndCosmeticsWithBonus(0);
         bonusCountEntity.setBeautyAndCosmeticsWithoutBonus(0);
         bonusCountEntity.setCinemaAndMusicWithBonus(0);

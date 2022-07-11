@@ -11,13 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.yaml.snakeyaml.util.EnumUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -36,6 +34,12 @@ public class BankUserController {
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
         return ResponseEntity.status(HttpStatus.OK).body("Sirgay");
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<?> getInformation(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(bankUser);
     }
 
     @PostMapping("/create-card")
@@ -92,7 +96,7 @@ public class BankUserController {
         creditCardEntity.setMoneyOnCard(creditCardEntity.getMoneyOnCard() - price);
         BankUser bankUser = getClientFromServletRequest(httpServletRequest);
         BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
-        bonusCountEntityService.addBonus(bankUser, bonusCountEntity, price, bonusCategory);
+        bonusCountEntityService.countBonus(bankUser, bonusCountEntity, price, bonusCategory);
 
 
         return ResponseEntity.status(HttpStatus.OK).body("The purchase was successful!");
@@ -102,6 +106,30 @@ public class BankUserController {
     public ResponseEntity<?> getBonuses(HttpServletRequest httpServletRequest) {
         BankUser bankUser = getClientFromServletRequest(httpServletRequest);
         BonusCountEntity result = bonusCountEntityRepository.findBonusCountEntityByBankUser(bankUser);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/best-combination")
+    public ResponseEntity<?> getBestCombination(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        List<String> result = bonusCountEntityService.getBestCombination(bankUser, bonusCountEntity);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/get-bonus")
+    public ResponseEntity<?> getBonus(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        double result = bonusCountEntity.getCurrentBonus();
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/maximum-bonus")
+    public ResponseEntity<?> getMaximumBonus(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        double result = bonusCountEntityService.getMaxBonus(bankUser, bonusCountEntity);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

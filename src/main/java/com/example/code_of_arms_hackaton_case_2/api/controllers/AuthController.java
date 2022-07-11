@@ -67,6 +67,7 @@ public class AuthController {
     }
     @GetMapping("/users")
     public List<BankUser> users() {
+
         return bankUserRepository.findAll();
     }
 

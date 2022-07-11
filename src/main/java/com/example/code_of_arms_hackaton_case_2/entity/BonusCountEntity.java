@@ -23,6 +23,9 @@ public class BonusCountEntity {
     private BankUser bankUser;
 
 
+    @Column(name = "current_bonus")
+    private double currentBonus;
+
 
     @Column(name = "cinema_and_music_without_bonus")
     private double cinemaAndMusicWithoutBonus;
