@@ -30,6 +30,7 @@ class MyBankViewController: UIViewController, GoToAppDelegate {
 		let searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 270, height: 20))
 		searchBar.placeholder = "Поиск в Jusan"
 		let leftNavBarButton = UIBarButtonItem(customView:searchBar)
+		
 		UINavigationBar.appearance().tintColor = .systemGray
 		navigationItem.rightBarButtonItems = [button, buttonN]
 		navigationItem.leftBarButtonItem = leftNavBarButton

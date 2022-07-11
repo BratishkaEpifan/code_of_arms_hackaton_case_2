@@ -42,6 +42,8 @@ class MyBankView: UIView {
 						  topText: "Платежная карта •3333",
 						  midText: "573890 ₸",
 						  bottomText: "в блоке 750 ₸")
+	
+	let collectionViewImage = UIImageView(image: UIImage(named: "collection"))
 		
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -88,5 +90,17 @@ class MyBankView: UIView {
 			cardView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
 			cardView.heightAnchor.constraint(equalToConstant: 100)
 		])
+		
+		collectionViewImage.translatesAutoresizingMaskIntoConstraints = false
+		collectionViewImage.layer.masksToBounds = true
+		collectionViewImage.layer.cornerRadius = 20
+		addSubview(collectionViewImage)
+		NSLayoutConstraint.activate([
+			collectionViewImage.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 20),
+			collectionViewImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+			collectionViewImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+			collectionViewImage.heightAnchor.constraint(equalToConstant: 170)
+		])
+
 	}
 }
