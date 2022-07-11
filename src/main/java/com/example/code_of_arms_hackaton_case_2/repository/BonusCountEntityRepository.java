@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Repository
 public interface BonusCountEntityRepository extends JpaRepository<BonusCountEntity, Long > {
 
-    BonusCountEntity findBonusCountEntityByBankUser(BankUser bankUser);
 
     @Modifying
     @Query("update BonusCountEntity b set b.clothesWithBonus = ?1, b.clothesWithoutBonus = ?2, b.currentBonus = ?3 where b.bonusId = ?4")

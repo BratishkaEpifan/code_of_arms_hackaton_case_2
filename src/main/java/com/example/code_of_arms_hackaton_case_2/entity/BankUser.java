@@ -42,8 +42,10 @@ public class BankUser {
     private BonusCountEntity bonusCountEntity;
 
 
-    @OneToMany(mappedBy = "bankUser")
-    private List<CreditCardEntity> cards;
+
+
+//    @OneToMany(mappedBy = "bankUser")
+//    private List<CreditCardEntity> cards;
 
 
 

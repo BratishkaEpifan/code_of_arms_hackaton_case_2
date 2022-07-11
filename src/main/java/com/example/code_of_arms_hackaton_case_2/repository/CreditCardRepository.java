@@ -17,6 +17,7 @@ public interface CreditCardRepository extends JpaRepository<CreditCardEntity, Lo
 
     CreditCardEntity getCreditCardEntityById(Long id);
 
+
     @Modifying
     @Query("update CreditCardEntity c set c.moneyOnCard = ?1 where c.id = ?2")
     void updateCreditCard(double amount, Long cardId);

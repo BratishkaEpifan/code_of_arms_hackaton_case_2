@@ -20,8 +20,8 @@ public class CreditCardEntity {
     @Column(name = "money_on_card")
     private double moneyOnCard;
 
-    @OneToMany(mappedBy = "creditCardEntity", cascade = CascadeType.ALL)
-    private List<InvoiceEntity> invoices;
+//    @OneToMany(mappedBy = "creditCardEntity", cascade = CascadeType.ALL)
+//    private List<InvoiceEntity> invoices;
 
     @ManyToOne(targetEntity = BankUser.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "userId")

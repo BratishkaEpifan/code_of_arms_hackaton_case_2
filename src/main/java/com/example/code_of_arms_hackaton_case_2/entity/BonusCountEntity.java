@@ -15,13 +15,6 @@ public class BonusCountEntity {
     @GeneratedValue
     private long bonusId;
 
-    @JoinColumn (
-            name = "user_id",
-            referencedColumnName = "userId"
-    )
-    @OneToOne(targetEntity = BankUser.class, cascade = CascadeType.ALL)
-    private BankUser bankUser;
-
 
     @Column(name = "current_bonus")
     private double currentBonus;

@@ -1,6 +1,7 @@
 package com.example.code_of_arms_hackaton_case_2.security;
 
 import com.example.code_of_arms_hackaton_case_2.entity.BankUser;
+import com.example.code_of_arms_hackaton_case_2.entity.BonusCategory;
 import com.example.code_of_arms_hackaton_case_2.entity.BonusCountEntity;
 import com.example.code_of_arms_hackaton_case_2.repository.BankUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,13 @@ public class UserService {
         bankUser.setRole("ROLE_USER");
         bankUser.setPassword(passwordEncoder.encode(bankUser.getPassword()));
         bankUser.setBonusLevel("SILVER");
-        bankUser.setBasePercent(0.5);
+        bankUser.setBasePercent(0.005);
+        bankUser.setBonusCategory1(BonusCategory.NONE);
+        bankUser.setBonusCategory2(BonusCategory.NONE);
+        bankUser.setBonusCategory3(BonusCategory.NONE);
+        bankUser.setBonusCategory4(BonusCategory.NONE);
 
         BonusCountEntity bonusCountEntity = new BonusCountEntity();
-        bonusCountEntity.setBankUser(bankUser);
         bonusCountEntity.setCurrentBonus(0.0);
         bonusCountEntity.setBeautyAndCosmeticsWithBonus(0);
         bonusCountEntity.setBeautyAndCosmeticsWithoutBonus(0);

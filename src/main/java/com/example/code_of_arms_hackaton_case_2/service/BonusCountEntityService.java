@@ -5,10 +5,7 @@ import com.example.code_of_arms_hackaton_case_2.entity.BonusCategory;
 import com.example.code_of_arms_hackaton_case_2.entity.BonusCountEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class BonusCountEntityService {
@@ -142,19 +139,20 @@ public class BonusCountEntityService {
         d[8] = bonusCountEntity.getRestaurantsWithBonus() - bonusCountEntity.getRestaurantsWithoutBonus();
         d[9] = bonusCountEntity.getTravelWithBonus() - bonusCountEntity.getTravelWithoutBonus();
 
-        HashMap<Double, String> hashMap = new HashMap<>();
-        hashMap.put(d[0], "BEAUTY_AND_COSMETICS");
-        hashMap.put(d[1], "TAXI");
-        hashMap.put(d[2], "CINEMA_AND_MUSIC");
-        hashMap.put(d[3], "CLOTHES");
-        hashMap.put(d[4], "FITNESS");
-        hashMap.put(d[5], "FURNITURE");
-        hashMap.put(d[6], "GAMES");
-        hashMap.put(d[7], "MEDICINE");
-        hashMap.put(d[8], "RESTAURANTS");
-        hashMap.put(d[9], "TRAVEL");
+        HashMap<String, Double> hashMap = new HashMap<>();
+        hashMap.put("BEAUTY_AND_COSMETICS", d[0]);
+        hashMap.put("TAXI", d[1]);
+        hashMap.put("CINEMA_AND_MUSIC", d[2]);
+        hashMap.put("CLOTHES", d[3]);
+        hashMap.put("FITNESS", d[4]);
+        hashMap.put("FURNITURE", d[5]);
+        hashMap.put("GAMES", d[6]);
+        hashMap.put("MEDICINE", d[7]);
+        hashMap.put("RESTAURANTS", d[8]);
+        hashMap.put("TRAVEL", d[9]);
 
-        Arrays.sort(d);
+        HashMap sortedHashMap = sortByValue(hashMap);
+
         int n = 0;
         if (bankUser.getBonusLevel().equals("SILVER")) {
             n = 1;
@@ -163,10 +161,16 @@ public class BonusCountEntityService {
         } else if (bankUser.getBonusLevel().equals("PLATINUM")) {
             n = 4;
         }
+        List<String> temp = new LinkedList<>();
+        for (Object key : sortedHashMap.keySet()) {
+            temp.add((String)key);
+        }
+
+
         List<String> result = new LinkedList<>();
 
         for (int i = 9; i > 9-n; i--) {
-            result.add(hashMap.get(d[i]));
+            result.add(temp.get(i));
         }
         return result;
     }
@@ -228,6 +232,28 @@ public class BonusCountEntityService {
         }
 
         return result;
+    }
+
+    private static HashMap<String, Double>  sortByValue(HashMap<String, Double> hm)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Double> > list
+                = new LinkedList<Map.Entry<String, Double> >(
+                hm.entrySet());
+
+        // Sort the list using lambda expression
+        Collections.sort(
+                list,
+                (i1,
+                 i2) -> i1.getValue().compareTo(i2.getValue()));
+
+        // put data from sorted list to hashmap
+        HashMap<String, Double> temp
+                = new LinkedHashMap<String, Double>();
+        for (Map.Entry<String, Double> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
     }
 
 

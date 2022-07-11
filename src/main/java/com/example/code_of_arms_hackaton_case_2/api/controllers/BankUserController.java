@@ -46,7 +46,9 @@ public class BankUserController {
     public ResponseEntity<?> createCard(HttpServletRequest httpServletRequest) {
         BankUser bankUser = getClientFromServletRequest(httpServletRequest);
         CreditCardEntity card = new CreditCardEntity();
-        bankUser.getCards().add(card);
+
+        List<CreditCardEntity> list = creditCardRepository.findCreditCardEntitiesByBankUser(bankUser);
+        list.add(card);
         card.setBankUser(bankUser);
         creditCardRepository.save(card);
         return ResponseEntity.status(HttpStatus.OK).body("The card was successfully created!");
@@ -90,7 +92,9 @@ public class BankUserController {
         InvoiceEntity invoiceEntity = new InvoiceEntity();
         invoiceEntity.setAmount(price);
         invoiceEntity.setDate(new Date(System.currentTimeMillis()));
-        creditCardEntity.getInvoices().add(invoiceEntity);
+        invoiceEntity.setCreditCardEntity(creditCardEntity);
+        List<InvoiceEntity> list = invoiceRepository.getInvoiceEntitiesByCreditCardEntity(creditCardEntity);
+        list.add(invoiceEntity);
 
 
         creditCardEntity.setMoneyOnCard(creditCardEntity.getMoneyOnCard() - price);
@@ -105,7 +109,7 @@ public class BankUserController {
     @GetMapping("/bonuses")
     public ResponseEntity<?> getBonuses(HttpServletRequest httpServletRequest) {
         BankUser bankUser = getClientFromServletRequest(httpServletRequest);
-        BonusCountEntity result = bonusCountEntityRepository.findBonusCountEntityByBankUser(bankUser);
+        BonusCountEntity result = bankUser.getBonusCountEntity();
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
@@ -159,13 +163,13 @@ public class BankUserController {
         BankUser bankUser = getClientFromServletRequest(httpServletRequest);
         if (s.equals("SILVER")) {
             bankUser.setBonusLevel("SILVER");
-            bankUser.setBasePercent(0.5);
+            bankUser.setBasePercent(0.005);
         } else if (s.equals("GOLD")) {
             bankUser.setBonusLevel("GOLD");
-            bankUser.setBasePercent(1.0);
+            bankUser.setBasePercent(0.01);
         } else if (s.equals("PLATINUM")) {
             bankUser.setBonusLevel("PLATINUM");
-            bankUser.setBasePercent(2.0);
+            bankUser.setBasePercent(0.02);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There is no such bonus level!");
         }

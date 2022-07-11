@@ -17,6 +17,7 @@ public class InvoiceEntity {
     private long invoiceId;
     private double amount;
     private Date date;
-    @ManyToOne
+    @ManyToOne(targetEntity = CreditCardEntity.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private CreditCardEntity creditCardEntity;
 }
