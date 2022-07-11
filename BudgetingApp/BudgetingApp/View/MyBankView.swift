@@ -20,8 +20,8 @@ class MyBankView: UIView {
 	var budgetButton: BAButton = {
 		let button = BAButton(imageTitle: "persent",
 							  topText: "Ваши расходы",
-							  midText: "-123141 ₸",
-							  bottomText: "Ожидания: 130000 ₸")
+							  midText: "-123 141.12 ₸",
+							  bottomText: "Ожидания: 130 000.12 ₸")
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.addTarget(self, action: #selector(goToApp), for: .touchUpInside)
 		return button
@@ -33,14 +33,14 @@ class MyBankView: UIView {
 		  
 	let bonusView = BAView(imageTitle: "bonus",
 						   topText: "Бонусы 2 %",
-						   midText: "3890 Б",
+						   midText: "3 890.12 Б",
 						   bottomText: "Максимальный уровень\n ....................................................................")
 	
 	let sectionTitleLabel = BALabel(text: "Карты")
 	
 	let cardView = BAView(imageTitle: "card",
 						  topText: "Платежная карта •3333",
-						  midText: "573890 ₸",
+						  midText: "573 890.12 ₸",
 						  bottomText: "в блоке 750 ₸")
 	
 	let collectionViewImage = UIImageView(image: UIImage(named: "collection"))

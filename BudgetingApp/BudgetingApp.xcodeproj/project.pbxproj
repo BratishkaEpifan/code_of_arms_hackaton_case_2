@@ -16,6 +16,7 @@
 		310B00A8287832A500A3BC17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 310B00A7287832A500A3BC17 /* Assets.xcassets */; };
 		310B00AB287832A500A3BC17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 310B00A9287832A500A3BC17 /* LaunchScreen.storyboard */; };
 		310B00B52878330400A3BC17 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B00B42878330400A3BC17 /* Model.swift */; };
+		642F6D06287C27B300EA125C /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 642F6D05287C27B300EA125C /* Charts */; };
 		644BB6942878448200FDAC0D /* MyBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB6932878448200FDAC0D /* MyBankViewController.swift */; };
 		644BB69628785F4900FDAC0D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB69528785F4900FDAC0D /* InfoView.swift */; };
 		644BB6982878799100FDAC0D /* MyBankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB6972878799100FDAC0D /* MyBankView.swift */; };
@@ -49,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				642F6D06287C27B300EA125C /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +152,9 @@
 			dependencies = (
 			);
 			name = BudgetingApp;
+			packageProductDependencies = (
+				642F6D05287C27B300EA125C /* Charts */,
+			);
 			productName = BudgetingApp;
 			productReference = 310B009B287832A400A3BC17 /* BudgetingApp.app */;
 			productType = "com.apple.product-type.application";
@@ -178,6 +183,9 @@
 				Base,
 			);
 			mainGroup = 310B0092287832A400A3BC17;
+			packageReferences = (
+				642F6D04287C27B300EA125C /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = 310B009C287832A400A3BC17 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -422,6 +430,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		642F6D04287C27B300EA125C /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		642F6D05287C27B300EA125C /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 642F6D04287C27B300EA125C /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 310B0093287832A400A3BC17 /* Project object */;
 }
