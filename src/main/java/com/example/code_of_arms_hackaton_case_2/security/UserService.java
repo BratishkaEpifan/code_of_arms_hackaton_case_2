@@ -25,7 +25,8 @@ public class UserService {
         bankUser.setBonusCategory4(BonusCategory.NONE);
 
         BonusCountEntity bonusCountEntity = new BonusCountEntity();
-        bonusCountEntity.setCurrentBonus(0.0);
+        bonusCountEntity.setCurrentBonus(0);
+        bonusCountEntity.setTotalExpenditure(0);
         bonusCountEntity.setBeautyAndCosmeticsWithBonus(0);
         bonusCountEntity.setBeautyAndCosmeticsWithoutBonus(0);
         bonusCountEntity.setCinemaAndMusicWithBonus(0);
@@ -46,6 +47,19 @@ public class UserService {
         bonusCountEntity.setRestaurantsWithBonus(0);
         bonusCountEntity.setTravelWithBonus(0);
         bonusCountEntity.setTravelWithoutBonus(0);
+        bonusCountEntity.setBeautyExpenditure(0);
+        bonusCountEntity.setCinemaAndMusicExpenditure(0);
+        bonusCountEntity.setFitnessExpenditure(0);
+        bonusCountEntity.setClothesExpenditure(0);
+        bonusCountEntity.setTaxiExpenditure(0);
+        bonusCountEntity.setFurnitureExpenditure(0);
+        bonusCountEntity.setMedicineExpenditure(0);
+        bonusCountEntity.setGamesExpenditure(0);
+        bonusCountEntity.setRestaurantsExpenditure(0);
+        bonusCountEntity.setTravelExpenditure(0);
+        bonusCountEntity.setNoCategoryBonus(0);
+        bonusCountEntity.setNoCategoryExpenditure(0);
+
 
         bankUser.setBonusCountEntity(bonusCountEntity);
         bankUserRepository.save(bankUser);

@@ -20,6 +20,10 @@ public class BonusCountEntity {
     private double currentBonus;
 
 
+    @Column(name = "total_expenditure")
+    private double totalExpenditure;
+
+
     @Column(name = "cinema_and_music_without_bonus")
     private double cinemaAndMusicWithoutBonus;
     @Column(name = "games_without_bonus")
@@ -32,7 +36,7 @@ public class BonusCountEntity {
     private double medicineWithoutBonus;
     @Column(name = "furniture_without_bonus")
     private double furnitureWithoutBonus;
-    @Column(name = "restaurant_without_bonus")
+    @Column(name = "restaurants_without_bonus")
     private double restaurantsWithoutBonus;
     @Column(name = "taxi_without_bonus")
     private double taxiWithoutBonus;
@@ -40,6 +44,9 @@ public class BonusCountEntity {
     private double travelWithoutBonus;
     @Column(name = "fitness_without_bonus")
     private double fitnessWithoutBonus;
+
+    @Column(name = "no_category_bonus")
+    private double noCategoryBonus;
 
 
     @Column(name = "cinema_and_music_with_bonus")
@@ -62,6 +69,30 @@ public class BonusCountEntity {
     private double travelWithBonus;
     @Column(name = "fitness_with_bonus")
     private double fitnessWithBonus;
+
+
+    @Column(name = "cinema_and_music_expenditure")
+    private double cinemaAndMusicExpenditure;
+    @Column(name = "games_expenditure")
+    private double gamesExpenditure;
+    @Column(name = "beauty_and_cosmetics_expenditure")
+    private double beautyExpenditure;
+    @Column(name = "clothes_expenditure")
+    private double clothesExpenditure;
+    @Column(name = "medicine_expenditure")
+    private double medicineExpenditure;
+    @Column(name = "furniture_expenditure")
+    private double furnitureExpenditure;
+    @Column(name = "restaurant_expenditure")
+    private double restaurantsExpenditure;
+    @Column(name = "taxi_expenditure")
+    private double taxiExpenditure;
+    @Column(name = "travel_expenditure")
+    private double travelExpenditure;
+    @Column(name = "fitness_expenditure")
+    private double fitnessExpenditure;
+    @Column(name = "no_category_expenditure")
+    private double noCategoryExpenditure;
 
 
 

@@ -16,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -26,7 +27,6 @@ import java.util.List;
 public class BankUserController {
     private final CreditCardRepository creditCardRepository;
     private final BankUserRepository bankUserRepository;
-    private final BonusCountEntityRepository bonusCountEntityRepository;
     private final InvoiceRepository invoiceRepository;
     private final JwtGenerator jwtGenerator;
     private final BonusCountEntityService bonusCountEntityService;
@@ -95,6 +95,7 @@ public class BankUserController {
         invoiceEntity.setCreditCardEntity(creditCardEntity);
         List<InvoiceEntity> list = invoiceRepository.getInvoiceEntitiesByCreditCardEntity(creditCardEntity);
         list.add(invoiceEntity);
+        invoiceRepository.save(invoiceEntity);
 
 
         creditCardEntity.setMoneyOnCard(creditCardEntity.getMoneyOnCard() - price);
@@ -106,12 +107,6 @@ public class BankUserController {
         return ResponseEntity.status(HttpStatus.OK).body("The purchase was successful!");
     }
 
-    @GetMapping("/bonuses")
-    public ResponseEntity<?> getBonuses(HttpServletRequest httpServletRequest) {
-        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
-        BonusCountEntity result = bankUser.getBonusCountEntity();
-        return ResponseEntity.status(HttpStatus.OK).body(result);
-    }
 
     @GetMapping("/best-combination")
     public ResponseEntity<?> getBestCombination(HttpServletRequest httpServletRequest) {
@@ -121,8 +116,19 @@ public class BankUserController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
+    @GetMapping("/current-combination")
+    public ResponseEntity<?> getCurrentCombination(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        List<String> result = new LinkedList<String>();
+        result.add(bankUser.getBonusCategory1().toString());
+        result.add(bankUser.getBonusCategory2().toString());
+        result.add(bankUser.getBonusCategory3().toString());
+        result.add(bankUser.getBonusCategory4().toString());
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
     @GetMapping("/get-bonus")
-    public ResponseEntity<?> getBonus(HttpServletRequest httpServletRequest) {
+    public ResponseEntity<?> getBonusEntity(HttpServletRequest httpServletRequest) {
         BankUser bankUser = getClientFromServletRequest(httpServletRequest);
         BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
         double result = bonusCountEntity.getCurrentBonus();
@@ -177,6 +183,296 @@ public class BankUserController {
     }
 
 
+
+
+
+
+
+
+    @GetMapping("/cinema-and-music")
+    public ResponseEntity<?> getCinema(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusCategory bonusCategory1 = bankUser.getBonusCategory1();
+        BonusCategory bonusCategory2 = bankUser.getBonusCategory2();
+        BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
+        BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
+        String s = "CINEMA_AND_MUSIC";
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getCinemaAndMusicExpenditure());
+        if (s.equals(bonusCategory1.toString()) || s.equals(bonusCategory2.toString())
+                || s.equals(bonusCategory3.toString()) || s.equals(bonusCategory4.toString())) {
+            result.setBonus(bonusCountEntity.getCinemaAndMusicWithBonus());
+            result.setPotentialBonus(bonusCountEntity.getCinemaAndMusicWithoutBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
+            result.setBonus(bonusCountEntity.getCinemaAndMusicWithoutBonus());
+            result.setPotentialBonus(bonusCountEntity.getCinemaAndMusicWithBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+    }
+
+    @GetMapping("/games")
+    public ResponseEntity<?> getGames(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusCategory bonusCategory1 = bankUser.getBonusCategory1();
+        BonusCategory bonusCategory2 = bankUser.getBonusCategory2();
+        BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
+        BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
+        String s = "GAMES";
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getGamesExpenditure());
+        if (s.equals(bonusCategory1.toString()) || s.equals(bonusCategory2.toString())
+                || s.equals(bonusCategory3.toString()) || s.equals(bonusCategory4.toString())) {
+            result.setBonus(bonusCountEntity.getGamesWithBonus());
+            result.setPotentialBonus(bonusCountEntity.getGamesWithoutBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
+            result.setBonus(bonusCountEntity.getGamesWithoutBonus());
+            result.setPotentialBonus(bonusCountEntity.getGamesWithBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+    }
+
+    @GetMapping("/beauty-and-cosmetics")
+    public ResponseEntity<?> getBeautyAndCosmetics(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusCategory bonusCategory1 = bankUser.getBonusCategory1();
+        BonusCategory bonusCategory2 = bankUser.getBonusCategory2();
+        BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
+        BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
+        String s = "BEAUTY_AND_COSMETICS";
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getBeautyExpenditure());
+
+        if (s.equals(bonusCategory1.toString()) || s.equals(bonusCategory2.toString())
+                || s.equals(bonusCategory3.toString()) || s.equals(bonusCategory4.toString())) {
+
+            result.setBonus(bonusCountEntity.getBeautyAndCosmeticsWithBonus());
+            result.setPotentialBonus(bonusCountEntity.getBeautyAndCosmeticsWithoutBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
+            result.setBonus(bonusCountEntity.getBeautyAndCosmeticsWithoutBonus());
+            result.setPotentialBonus(bonusCountEntity.getBeautyAndCosmeticsWithBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+    }
+
+    @GetMapping("/clothes")
+    public ResponseEntity<?> getClothes(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusCategory bonusCategory1 = bankUser.getBonusCategory1();
+        BonusCategory bonusCategory2 = bankUser.getBonusCategory2();
+        BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
+        BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
+        String s = "CLOTHES";
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getClothesExpenditure());
+
+        if (s.equals(bonusCategory1.toString()) || s.equals(bonusCategory2.toString())
+                || s.equals(bonusCategory3.toString()) || s.equals(bonusCategory4.toString())) {
+            result.setBonus(bonusCountEntity.getClothesWithBonus());
+            result.setPotentialBonus(bonusCountEntity.getClothesWithoutBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
+            result.setBonus(bonusCountEntity.getClothesWithoutBonus());
+            result.setPotentialBonus(bonusCountEntity.getClothesWithBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+    }
+
+    @GetMapping("/medicine")
+    public ResponseEntity<?> getMedicine(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusCategory bonusCategory1 = bankUser.getBonusCategory1();
+        BonusCategory bonusCategory2 = bankUser.getBonusCategory2();
+        BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
+        BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
+        String s = "MEDICINE";
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getMedicineExpenditure());
+
+        if (s.equals(bonusCategory1.toString()) || s.equals(bonusCategory2.toString())
+                || s.equals(bonusCategory3.toString()) || s.equals(bonusCategory4.toString())) {
+            result.setBonus(bonusCountEntity.getMedicineWithBonus());
+            result.setPotentialBonus(bonusCountEntity.getMedicineWithoutBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
+            result.setBonus(bonusCountEntity.getMedicineWithoutBonus());
+            result.setPotentialBonus(bonusCountEntity.getMedicineWithBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+    }
+
+    @GetMapping("/furniture")
+    public ResponseEntity<?> getFurniture(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusCategory bonusCategory1 = bankUser.getBonusCategory1();
+        BonusCategory bonusCategory2 = bankUser.getBonusCategory2();
+        BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
+        BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
+        String s = "FURNITURE";
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getFurnitureExpenditure());
+        if (s.equals(bonusCategory1.toString()) || s.equals(bonusCategory2.toString())
+                || s.equals(bonusCategory3.toString()) || s.equals(bonusCategory4.toString())) {
+            result.setBonus(bonusCountEntity.getFurnitureWithBonus());
+            result.setPotentialBonus(bonusCountEntity.getFurnitureWithoutBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
+            result.setBonus(bonusCountEntity.getFurnitureWithoutBonus());
+            result.setPotentialBonus(bonusCountEntity.getFurnitureWithBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+    }
+
+    @GetMapping("/restaurants")
+    public ResponseEntity<?> getRestaurants(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusCategory bonusCategory1 = bankUser.getBonusCategory1();
+        BonusCategory bonusCategory2 = bankUser.getBonusCategory2();
+        BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
+        BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
+        String s = "RESTAURANTS";
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getRestaurantsExpenditure());
+
+        if (s.equals(bonusCategory1.toString()) || s.equals(bonusCategory2.toString())
+                || s.equals(bonusCategory3.toString()) || s.equals(bonusCategory4.toString())) {
+            result.setBonus(bonusCountEntity.getRestaurantsWithBonus());
+            result.setPotentialBonus(bonusCountEntity.getRestaurantsWithoutBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
+            result.setBonus(bonusCountEntity.getRestaurantsWithoutBonus());
+            result.setPotentialBonus(bonusCountEntity.getRestaurantsWithBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+    }
+
+    @GetMapping("/taxi")
+    public ResponseEntity<?> getTaxi(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusCategory bonusCategory1 = bankUser.getBonusCategory1();
+        BonusCategory bonusCategory2 = bankUser.getBonusCategory2();
+        BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
+        BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
+        String s = "TAXI";
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getTaxiExpenditure());
+
+        if (s.equals(bonusCategory1.toString()) || s.equals(bonusCategory2.toString())
+                || s.equals(bonusCategory3.toString()) || s.equals(bonusCategory4.toString())) {
+            result.setBonus(bonusCountEntity.getTaxiWithBonus());
+            result.setPotentialBonus(bonusCountEntity.getTaxiWithoutBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
+            result.setBonus(bonusCountEntity.getTaxiWithoutBonus());
+            result.setPotentialBonus(bonusCountEntity.getTaxiWithBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+    }
+
+    @GetMapping("/travel")
+    public ResponseEntity<?> getTravel(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusCategory bonusCategory1 = bankUser.getBonusCategory1();
+        BonusCategory bonusCategory2 = bankUser.getBonusCategory2();
+        BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
+        BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
+        String s = "TRAVEL";
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getTravelExpenditure());
+
+        if (s.equals(bonusCategory1.toString()) || s.equals(bonusCategory2.toString())
+                || s.equals(bonusCategory3.toString()) || s.equals(bonusCategory4.toString())) {
+            result.setBonus(bonusCountEntity.getTravelWithBonus());
+            result.setPotentialBonus(bonusCountEntity.getTravelWithoutBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
+            result.setBonus(bonusCountEntity.getTravelWithoutBonus());
+            result.setPotentialBonus(bonusCountEntity.getTravelWithBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+    }
+
+
+
+    @GetMapping("/fitness")
+    public ResponseEntity<?> getFitness(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusCategory bonusCategory1 = bankUser.getBonusCategory1();
+        BonusCategory bonusCategory2 = bankUser.getBonusCategory2();
+        BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
+        BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
+        String s = "FITNESS";
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getFitnessExpenditure());
+
+        if (s.equals(bonusCategory1.toString()) || s.equals(bonusCategory2.toString())
+                || s.equals(bonusCategory3.toString()) || s.equals(bonusCategory4.toString())) {
+            result.setBonus(bonusCountEntity.getFitnessWithBonus());
+            result.setPotentialBonus(bonusCountEntity.getFitnessWithoutBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
+            result.setBonus(bonusCountEntity.getFitnessWithoutBonus());
+            result.setPotentialBonus(bonusCountEntity.getFitnessWithBonus());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+    }
+
+
+    @GetMapping("/no-category")
+    public ResponseEntity<?> getNoCategory(HttpServletRequest httpServletRequest) {
+        BankUser bankUser = getClientFromServletRequest(httpServletRequest);
+        BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
+        BonusResponseEntity result = new BonusResponseEntity();
+        result.setExpenditure(bonusCountEntity.getTotalExpenditure());
+        result.setBonus(bonusCountEntity.getNoCategoryBonus());
+        result.setPotentialBonus(bonusCountEntity.getNoCategoryBonus());
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private BankUser getClientFromServletRequest(HttpServletRequest httpServletRequest) {
         Cookie[] cookies = httpServletRequest.getCookies();
         String token = "";
@@ -191,6 +487,7 @@ public class BankUserController {
         BankUser bankUser = bankUserRepository.findBankUserByLogin(login);
         return bankUser;
     }
+
 
     private BonusCategory stringToBonusCategory (String category) {
         String s = category.toUpperCase();

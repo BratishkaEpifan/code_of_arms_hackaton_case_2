@@ -19,9 +19,11 @@ public class BonusCountEntityService {
         BonusCategory bonusCategory3 = bankUser.getBonusCategory3();
         BonusCategory bonusCategory4 = bankUser.getBonusCategory4();
 
+        bonusCountEntity.setTotalExpenditure(bonusCountEntity.getTotalExpenditure() + amount);
 
         String s = category.toUpperCase();
         if (s.equals(BonusCategory.BEAUTY_AND_COSMETICS.toString())) {
+            bonusCountEntity.setBeautyExpenditure(bonusCountEntity.getBeautyExpenditure() + amount);
             bonus = 0.07*amount;
             bonusCountEntity.setBeautyAndCosmeticsWithBonus(bonusCountEntity.getBeautyAndCosmeticsWithBonus() + bonus);
             bonusCountEntity.setBeautyAndCosmeticsWithoutBonus(bonusCountEntity.getBeautyAndCosmeticsWithoutBonus() + basePercent*amount);
@@ -32,6 +34,7 @@ public class BonusCountEntityService {
                 bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
             }
         } else if (s.equals(BonusCategory.CINEMA_AND_MUSIC.toString())) {
+            bonusCountEntity.setCinemaAndMusicExpenditure(bonusCountEntity.getCinemaAndMusicExpenditure() + amount);
             bonus = 0.15*amount;
             bonusCountEntity.setCinemaAndMusicWithBonus(bonusCountEntity.getCinemaAndMusicWithBonus() + bonus);
             bonusCountEntity.setCinemaAndMusicWithoutBonus(bonusCountEntity.getCinemaAndMusicWithoutBonus() + basePercent*amount);
@@ -42,6 +45,7 @@ public class BonusCountEntityService {
                 bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
             }
         } else if (s.equals(BonusCategory.CLOTHES.toString())) {
+            bonusCountEntity.setClothesExpenditure(bonusCountEntity.getClothesExpenditure() + amount);
             bonus = 0.05*amount;
             bonusCountEntity.setClothesWithBonus(bonusCountEntity.getClothesWithBonus() + bonus);
             bonusCountEntity.setClothesWithoutBonus(bonusCountEntity.getClothesWithoutBonus() + basePercent*amount);
@@ -52,6 +56,7 @@ public class BonusCountEntityService {
                 bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
             }
         } else if (s.equals(BonusCategory.FITNESS.toString())) {
+            bonusCountEntity.setFitnessExpenditure(bonusCountEntity.getFitnessExpenditure() + amount);
             bonus = 0.05*amount;
             bonusCountEntity.setFitnessWithBonus(bonusCountEntity.getFitnessWithBonus() + bonus);
             bonusCountEntity.setFitnessWithoutBonus(bonusCountEntity.getFitnessWithoutBonus() + basePercent*amount);
@@ -62,6 +67,7 @@ public class BonusCountEntityService {
                 bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
             }
         } else if (s.equals(BonusCategory.FURNITURE.toString())) {
+            bonusCountEntity.setFurnitureExpenditure(bonusCountEntity.getFurnitureExpenditure() + amount);
             bonus = 0.05*amount;
             bonusCountEntity.setFurnitureWithBonus(bonusCountEntity.getFurnitureWithBonus() + bonus);
             bonusCountEntity.setFurnitureWithoutBonus(bonusCountEntity.getFurnitureWithoutBonus() + basePercent*amount);
@@ -72,6 +78,7 @@ public class BonusCountEntityService {
                 bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
             }
         } else if (s.equals(BonusCategory.GAMES.toString())) {
+            bonusCountEntity.setGamesExpenditure(bonusCountEntity.getGamesExpenditure() + amount);
             bonus = 0.1*amount;
             bonusCountEntity.setGamesWithBonus(bonusCountEntity.getGamesWithBonus() + bonus);
             bonusCountEntity.setGamesWithoutBonus(bonusCountEntity.getGamesWithoutBonus() + basePercent*amount);
@@ -82,6 +89,7 @@ public class BonusCountEntityService {
                 bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
             }
         } else if (s.equals(BonusCategory.MEDICINE.toString())) {
+            bonusCountEntity.setMedicineExpenditure(bonusCountEntity.getMedicineExpenditure() + amount);
             bonus = 0.05*amount;
             bonusCountEntity.setMedicineWithBonus(bonusCountEntity.getMedicineWithBonus() + bonus);
             bonusCountEntity.setMedicineWithoutBonus(bonusCountEntity.getMedicineWithoutBonus() + basePercent*amount);
@@ -92,6 +100,7 @@ public class BonusCountEntityService {
                 bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
             }
         } else if (s.equals(BonusCategory.RESTAURANTS.toString())) {
+            bonusCountEntity.setRestaurantsExpenditure(bonusCountEntity.getRestaurantsExpenditure() + amount);
             bonus = 0.05*amount;
             bonusCountEntity.setRestaurantsWithBonus(bonusCountEntity.getRestaurantsWithBonus() + bonus);
             bonusCountEntity.setRestaurantsWithoutBonus(bonusCountEntity.getRestaurantsWithoutBonus() + basePercent*amount);
@@ -102,6 +111,7 @@ public class BonusCountEntityService {
                 bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
             }
         } else if (s.equals(BonusCategory.TAXI.toString())) {
+            bonusCountEntity.setTaxiExpenditure(bonusCountEntity.getTaxiExpenditure() + amount);
             bonus = 0.05*amount;
             bonusCountEntity.setTaxiWithBonus(bonusCountEntity.getTaxiWithBonus() + bonus);
             bonusCountEntity.setTaxiWithoutBonus(bonusCountEntity.getTaxiWithoutBonus() + basePercent*amount);
@@ -112,6 +122,7 @@ public class BonusCountEntityService {
                 bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
             }
         } else if (s.equals(BonusCategory.TRAVEL.toString())) {
+            bonusCountEntity.setTravelExpenditure(bonusCountEntity.getTravelExpenditure() + amount);
             bonus = 0.05*amount;
             bonusCountEntity.setTravelWithBonus(bonusCountEntity.getTravelWithBonus() + bonus);
             bonusCountEntity.setTravelWithoutBonus(bonusCountEntity.getTravelWithoutBonus() + basePercent*amount);
@@ -121,6 +132,10 @@ public class BonusCountEntityService {
             } else {
                 bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
             }
+        } else {
+            bonusCountEntity.setNoCategoryExpenditure(bonusCountEntity.getNoCategoryExpenditure() + amount);
+            bonusCountEntity.setNoCategoryBonus(bonusCountEntity.getNoCategoryBonus() + basePercent*amount);
+            bonusCountEntity.setCurrentBonus(bonusCountEntity.getCurrentBonus() + basePercent*amount);
         }
     }
 
