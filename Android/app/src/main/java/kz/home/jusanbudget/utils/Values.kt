@@ -1,6 +1,5 @@
 package kz.home.jusanbudget.utils
 
-import android.content.res.Resources
 import kz.home.jusanbudget.R
 import kz.home.jusanbudget.domain.Category
 

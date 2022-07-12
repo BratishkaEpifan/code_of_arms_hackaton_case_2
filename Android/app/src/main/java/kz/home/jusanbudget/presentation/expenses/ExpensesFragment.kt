@@ -74,7 +74,7 @@ class ExpensesFragment : Fragment(R.layout.fragment_expenses) {
     }
 
     private fun generateCenterText() : SpannableString {
-        val s = SpannableString("$sum ₸ \n$bonus Б")
+        val s = SpannableString("$sum ₸ \n${viewModel.getBonus()} Б")
         s.setSpan(RelativeSizeSpan(2f), 0, 8, 0)
         s.setSpan(ForegroundColorSpan(Color.GRAY), 8, s.length, 0)
         return s
