@@ -7,17 +7,25 @@
 
 import UIKit
 
-class ThirdViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ThirdViewController: UIViewController {
 	
-	let collectionView: UICollectionView = {
-		let layout = UICollectionViewFlowLayout()
-		layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-		layout.itemSize = CGSize(width: 100, height: 120)
-		layout.scrollDirection = .horizontal
-		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-		collectionView.translatesAutoresizingMaskIntoConstraints = false
-		return collectionView
+	let collectionView = BACollectionView()
+	let bonusInfoButton: UIButton = {
+		let button = UIButton(type: .system)
+		button.setTitle("Про гарантированные бонусы не забудьте       >", for: .normal)
+		button.tintColor = .systemGreen
+		button.addTarget(self, action: #selector(showBonusViewController), for: .touchUpInside)
+		button.translatesAutoresizingMaskIntoConstraints = false
+		return button
 	}()
+	
+	@objc func showBonusViewController() {
+		let vc = UIViewController()
+		let imageView = UIImageView(image: UIImage(named: "bonusVC")!)
+		vc.view = imageView
+		vc.modalPresentationStyle = .pageSheet
+		present(vc, animated: true)
+	}
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +34,6 @@ class ThirdViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
 	
 	func configure() {
-		collectionView.dataSource = self
-		collectionView.delegate = self
-		collectionView.register(BACollectionViewCell.self, forCellWithReuseIdentifier: BACollectionViewCell.cellID)
 		
 		view.addSubview(collectionView)
 		NSLayoutConstraint.activate([
@@ -37,16 +42,16 @@ class ThirdViewController: UIViewController, UICollectionViewDataSource, UIColle
 			collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			collectionView.heightAnchor.constraint(equalToConstant: 150)
 		])
+		
+		bonusInfoButton
+		view.addSubview(bonusInfoButton)
+		NSLayoutConstraint.activate([
+			bonusInfoButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 5),
+			bonusInfoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+			bonusInfoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+			bonusInfoButton.heightAnchor.constraint(equalToConstant: 15)
+		])
 	}
 
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		40
-	}
 	
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BACollectionViewCell.cellID, for: indexPath) as! BACollectionViewCell
-		cell.setup(title: "Aidyn", cash: "123 431 T", imageTitle: "airplane.circle.fill")
-		return cell
-	}
-
 }

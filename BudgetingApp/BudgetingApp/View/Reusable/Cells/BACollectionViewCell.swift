@@ -15,10 +15,13 @@ class BACollectionViewCell: UICollectionViewCell {
 	let sectionTitleLabel = UILabel()
 	let sectionBonusLabel = UILabel()
 	
-	func setup(title: String, cash: String, imageTitle: String) {
-		sectionTitleLabel.text = title
-		sectionBonusLabel.text = cash
-		sectionImageView.image = UIImage(systemName: imageTitle)
+	func setup(_ category: Category) {
+		sectionTitleLabel.text = category.name
+		sectionBonusLabel.text = "\(category.expense) ₸"
+		let image = UIImage(systemName: category.imageName)
+		sectionImageView.image = image
+		sectionImageView.tintColor = category.color
+		sectionBonusLabel.textColor = UIColor(named: "orange")
 	}
 	
 	override init(frame: CGRect) {
@@ -36,34 +39,34 @@ class BACollectionViewCell: UICollectionViewCell {
 		sectionBonusLabel.translatesAutoresizingMaskIntoConstraints = false
 		
 		sectionTitleLabel.textAlignment = .center
-		sectionTitleLabel.font = .systemFont(ofSize: 12)
+		sectionTitleLabel.font = .systemFont(ofSize: 16)
+		sectionTitleLabel.numberOfLines = 0
 		sectionBonusLabel.textAlignment = .center
-		sectionBonusLabel.font = .systemFont(ofSize: 10
-		)
+		sectionBonusLabel.font = .systemFont(ofSize: 14)
 		
-		backgroundColor = .systemOrange
+		backgroundColor = .systemGray6
 		layer.masksToBounds = true
-		layer.cornerRadius = 30
+		layer.cornerRadius = 20
 		
 		addSubview(sectionImageView)
 		addSubview(sectionTitleLabel)
 		addSubview(sectionBonusLabel)
-		let padding: CGFloat = 10
+		let padding: CGFloat = 20
 		NSLayoutConstraint.activate([
-			sectionImageView.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-			sectionImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-			sectionImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+			sectionImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+			sectionImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding+5),
+			sectionImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding-5),
 			sectionImageView.heightAnchor.constraint(equalTo: sectionImageView.widthAnchor),
 			
-			sectionBonusLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1),
-			sectionBonusLabel.leadingAnchor.constraint(equalTo: sectionImageView.leadingAnchor),
-			sectionBonusLabel.trailingAnchor.constraint(equalTo: sectionImageView.trailingAnchor),
-			sectionBonusLabel.heightAnchor.constraint(equalToConstant: 8),
+			sectionBonusLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+			sectionBonusLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+			sectionBonusLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+			sectionBonusLabel.heightAnchor.constraint(equalToConstant: 10),
 			
-			sectionTitleLabel.topAnchor.constraint(equalTo: sectionImageView.bottomAnchor, constant: 1),
-			sectionTitleLabel.bottomAnchor.constraint(equalTo: sectionBonusLabel.topAnchor, constant: 1),
-			sectionTitleLabel.leadingAnchor.constraint(equalTo: sectionImageView.leadingAnchor),
-			sectionTitleLabel.trailingAnchor.constraint(equalTo: sectionImageView.trailingAnchor)
+			sectionTitleLabel.topAnchor.constraint(equalTo: sectionImageView.bottomAnchor),
+			sectionTitleLabel.bottomAnchor.constraint(equalTo: sectionBonusLabel.topAnchor),
+			sectionTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+			sectionTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
 		])
 	}
 }
