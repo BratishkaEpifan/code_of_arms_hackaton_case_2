@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "chair.lounge.fill@2x.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
