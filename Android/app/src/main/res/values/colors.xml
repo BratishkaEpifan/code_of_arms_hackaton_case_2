@@ -8,6 +8,17 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#9F9E9E</color>
-    <color name="orange">#FF4810</color>
+    <color name="jusan">#FF4810</color>
     <color name="background">#F7F5F6</color>
+    <color name="red">#FC3F3F</color>
+    <color name="orange">#ffa43d</color>
+    <color name="yellow">#fff34d</color>
+    <color name="mellon">#e5fc4c</color>
+    <color name="salad">#5effbc</color>
+    <color name="azure">#57effa</color>
+    <color name="blue">#459cff</color>
+    <color name="berry">#844aff</color>
+    <color name="purple">#d04dff</color>
+    <color name="coral">#e65c5c</color>
+    <color name="green">#3eb350</color>
 </resources>
