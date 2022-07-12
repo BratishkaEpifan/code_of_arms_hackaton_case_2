@@ -49,12 +49,12 @@ class BAButton: UIButton {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	init(imageTitle: String, topText: String, midText: String, bottomText: String) {
+	init(imageTitle: String, topText: String, midText: NSAttributedString, bottomText: String) {
 		super.init(frame: .zero)
 		translatesAutoresizingMaskIntoConstraints = false
 		infoImageView.image = UIImage(named: imageTitle)
 		topLabel.text = topText
-		midLabel.text = midText
+		midLabel.attributedText = midText
 		bottomLabel.text = bottomText
 	}
 	

@@ -18,9 +18,10 @@ class MyBankView: UIView {
 	let view = UIView()
 	
 	var budgetButton: BAButton = {
+		let midText: NSAttributedString = "-123 141.12 ₸".attributedStringWithColor([".12 ₸"], color: .systemGray)
 		let button = BAButton(imageTitle: "persent",
 							  topText: "Ваши расходы",
-							  midText: "-123 141.12 ₸",
+							  midText: midText,
 							  bottomText: "Ожидания: 130 000.12 ₸")
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.addTarget(self, action: #selector(goToApp), for: .touchUpInside)
@@ -102,5 +103,21 @@ class MyBankView: UIView {
 			collectionViewImage.heightAnchor.constraint(equalToConstant: 170)
 		])
 
+	}
+}
+
+extension String {
+	func attributedStringWithColor(_ strings: [String], color: UIColor, characterSpacing: UInt? = nil) -> NSAttributedString {
+		let attributedString = NSMutableAttributedString(string: self)
+		for string in strings {
+			let range = (self as NSString).range(of: string)
+			attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+		}
+
+		guard let characterSpacing = characterSpacing else {return attributedString}
+
+		attributedString.addAttribute(NSAttributedString.Key.kern, value: characterSpacing, range: NSRange(location: 0, length: attributedString.length))
+
+		return attributedString
 	}
 }

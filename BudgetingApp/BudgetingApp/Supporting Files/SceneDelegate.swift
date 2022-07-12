@@ -15,13 +15,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 		window = UIWindow(windowScene: windowScene)
-		window?.rootViewController = SecondViewController()
-//		window?.rootViewController = createTabBar()
+		window?.rootViewController = createTabBar()
 		window?.makeKeyAndVisible()
     }
 	
 	func mainNC() -> UINavigationController {
 		let mainVC = UIViewController()
+		let imageView = UIImageView(image: UIImage(named: "homeScreen")!)
+		imageView.frame = CGRect(x: 0, y: 33, width: mainVC.view.frame.width, height: mainVC.view.frame.height - 115)
+		mainVC.view.addSubview(imageView)
 		mainVC.view.backgroundColor = .systemBackground
 		let image = UIImage(systemName: "house.fill")
 		mainVC.tabBarItem = UITabBarItem(title: "главная", image: image, tag: 0)
@@ -39,6 +41,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	
 	func transactionNC() -> UINavigationController {
 		let mybankVC = UIViewController()
+		let imageView = UIImageView(image: UIImage(named: "transfersScreen")!)
+		imageView.frame = CGRect(x: 0, y: 33, width: mybankVC.view.frame.width, height: mybankVC.view.frame.height - 115)
+		mybankVC.view.addSubview(imageView)
 		mybankVC.view.backgroundColor = .systemBackground
 		let image = UIImage(systemName: "arrow.left.arrow.right.square.fill")
 		mybankVC.tabBarItem = UITabBarItem(title: "переводы", image: image, tag: 2)
@@ -47,6 +52,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	
 	func paymentNC() -> UINavigationController {
 		let mybankVC = UIViewController()
+		let imageView = UIImageView(image: UIImage(named: "paymentsScreen")!)
+		imageView.frame = CGRect(x: 0, y: 33, width: mybankVC.view.frame.width, height: mybankVC.view.frame.height - 115)
+		mybankVC.view.addSubview(imageView)
+
 		mybankVC.view.backgroundColor = .systemBackground
 		let image = UIImage(systemName: "arrow.right.square.fill")
 		mybankVC.tabBarItem = UITabBarItem(title: "платежи", image: image, tag: 3)

@@ -29,8 +29,8 @@ class TabBarViewController: UITabBarController {
         vc2.tabBarItem = UITabBarItem(title: "Прогноз", image: image2, tag: 2)
         
         let vc3 = ThirdViewController()
-        let image3 = UIImage(systemName: "house")
-        vc3.tabBarItem = UITabBarItem(title: "Домой", image: image3, tag: 2)
+        let image3 = UIImage(systemName: "square.grid.3x3.middle.filled")
+        vc3.tabBarItem = UITabBarItem(title: "Отчёты", image: image3, tag: 2)
         self.setViewControllers([vc1, vc2, vc3], animated: false)
     }
 
