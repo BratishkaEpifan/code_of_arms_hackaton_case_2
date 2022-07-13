@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../../layout/custom_preview.xml" value="0.17715827338129497" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2185" />
+        <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/apps_icon.xml" value="0.1615" />
+        <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/bar_chart_icon.xml" value="0.1615" />
+        <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/credit_card_icon.xml" value="0.1615" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2185" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/ic_baseline_apps_24.xml" value="0.2185" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.2185" />
@@ -15,6 +17,7 @@
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/ic_baseline_sync_alt_24.xml" value="0.2185" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2185" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/icon_foreground.xml" value="0.11" />
+        <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/pie_chart_icon.xml" value="0.1615" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/layout/activity_budget.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/layout/activity_main.xml" value="0.18984375" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/layout/activity_my_bank.xml" value="0.264" />
@@ -23,19 +26,13 @@
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/layout/fragment_future.xml" value="0.253125" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/layout/fragment_my_bank.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/layout/fragment_new.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/layout/item_all_categories_rv.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/layout/item_category.xml" value="0.264" />
+        <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/layout/item_my_categories_rv.xml" value="0.43759873617693523" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/menu-v26/bottom_navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.253125" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/menu/main_menu.xml" value="0.253125" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2185" />
-        <entry key="app/src/main/res/font/dm_serif_display.xml" value="0.3255208333333333" />
-        <entry key="app/src/main/res/layout/fragment_expenses.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/fragment_future.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/fragment_new.xml" value="0.5794876098632813" />
-        <entry key="app/src/main/res/layout/item_all_categories_rv.xml" value="0.502541942470121" />
-        <entry key="app/src/main/res/layout/item_category.xml" value="0.516343688964844" />
-        <entry key="app/src/main/res/layout/item_my_categories_rv.xml" value="1.0719021035938663" />
-        <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3104166666666667" />
-        <entry key="app/src/main/res/menu/main_menu.xml" value="0.3104166666666667" />
       </map>
     </option>
   </component>

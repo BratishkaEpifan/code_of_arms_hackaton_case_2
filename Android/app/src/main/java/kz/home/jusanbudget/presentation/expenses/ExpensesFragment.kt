@@ -5,36 +5,49 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import kz.home.jusanbudget.R
 import kz.home.jusanbudget.domain.Category
 import kz.home.jusanbudget.utils.categories
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ExpensesFragment : Fragment(R.layout.fragment_expenses) {
+class ExpensesFragment : Fragment(R.layout.fragment_expenses), OnChartValueSelectedListener {
     private val viewModel: ExpensesViewModel by viewModel()
     private lateinit var chart: PieChart
     private lateinit var recyclerView: RecyclerView
+    private lateinit var categoryManager: LinearLayoutManager
     var sum = 0F
     var bonus = 0F
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //viewModel.register()
+        //viewModel.authorization()
+        Log.e("", viewModel.getAllBonus())
+
         val categoryAdapter = setupRecyclerView(view)
         categoryAdapter.setItems(categories)
 
+        sum = 0F
+        bonus = 0F
         calculateProportions()
         setupChart(view)
         chart.animateX(1000)
+        chart.setOnChartValueSelectedListener(this)
     }
 
     private fun setupChart(view: View) {
@@ -52,7 +65,7 @@ class ExpensesFragment : Fragment(R.layout.fragment_expenses) {
     private fun setupRecyclerView(view: View): CategoryAdapter {
         recyclerView = view.findViewById(R.id.categories_rv)
         val categoryAdapter = CategoryAdapter()
-        val categoryManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        categoryManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         recyclerView.apply {
             adapter = categoryAdapter
@@ -105,5 +118,30 @@ class ExpensesFragment : Fragment(R.layout.fragment_expenses) {
         val d = PieData(ds1)
         d.setValueFormatter(PercentFormatter(chart))
         return d
+    }
+
+    override fun onValueSelected(e: Entry?, h: Highlight?) {
+        var position = 12
+        for (i in categories.indices) {
+            if (e?.y == categories[i].proportions) {
+                position = i
+            }
+        }
+        Log.e("", "${e?.y.toString()} $position")
+        if (position !=12) {
+            scrollToBottom(position)
+        }
+    }
+
+    override fun onNothingSelected() {
+        TODO("Not yet implemented")
+    }
+
+    private fun scrollToBottom(position: Int) {
+        val smoothScroller = object : LinearSmoothScroller(context) {
+            override fun getVerticalSnapPreference(): Int = SNAP_TO_START
+        }
+        smoothScroller.targetPosition = position
+        categoryManager.startSmoothScroll(smoothScroller)
     }
 }

@@ -19,8 +19,8 @@ class MyBankViewModel(
 
     fun authorization() {
         viewModelScope.launch(ioDispatcher) {
-            //repository.authUser(AuthenticationRequest(login, password))
-            repository.authUser(AuthenticationRequest("string", "string"))
+            repository.authUser(AuthenticationRequest(login, password))
+            //repository.authUser(AuthenticationRequest("string", "string"))
             //Log.e("", repository.getBonus())
         }
     }

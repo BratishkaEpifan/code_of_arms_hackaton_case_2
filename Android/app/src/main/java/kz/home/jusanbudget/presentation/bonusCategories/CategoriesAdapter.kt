@@ -6,19 +6,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kz.home.jusanbudget.databinding.ItemAllCategoriesRvBinding
+import kz.home.jusanbudget.domain.Category
 import kz.home.jusanbudget.domain.CategoryDaniyar
 
 class CategoriesAdapter() :
-    ListAdapter<CategoryDaniyar, CategoriesAdapter.CategoriesViewHolder>(MyCategoriesDiffUtilCallback()) {
+    ListAdapter<Category, CategoriesAdapter.CategoriesViewHolder>(CategoriesDiffUtilCallback()) {
 
     inner class CategoriesViewHolder(val binding: ItemAllCategoriesRvBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CategoryDaniyar) {
-            binding.tvCategoryName.text = item.categoryName
-            binding.tvMyBonuses.text = item.myBonuses
-            binding.tvPossibleBonuses.text = item.possibleBonuses
-            binding.ivCategoryIcon.setImageResource(item.categoryIcon)
-            binding.tvCategoryBonus.text = item.categoryBonus
+        fun bind(item: Category) {
+            binding.tvCategoryName.text = item.name
+            binding.tvMyBonuses.text = item.bonuses.toString()
+            binding.tvPossibleBonuses.text = item.possibleBonus.toString()
+            binding.ivCategoryIcon.setImageResource(item.img)
+            binding.tvCategoryBonus.text = item.percent.toString()
         }
     }
 
@@ -37,12 +38,12 @@ class CategoriesAdapter() :
     }
 }
 
-class MyCategoriesDiffUtilCallback : DiffUtil.ItemCallback<CategoryDaniyar>() {
-    override fun areItemsTheSame(oldItem: CategoryDaniyar, newItem: CategoryDaniyar): Boolean {
+class CategoriesDiffUtilCallback : DiffUtil.ItemCallback<Category>() {
+    override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: CategoryDaniyar, newItem: CategoryDaniyar): Boolean {
+    override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
         return oldItem == newItem
     }
 }
