@@ -24,6 +24,10 @@
 		644BB6A52879862F00FDAC0D /* BAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB6A22879862F00FDAC0D /* BAView.swift */; };
 		644BB6A62879862F00FDAC0D /* BAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB6A32879862F00FDAC0D /* BAButton.swift */; };
 		6466FDF9287D3B1F00AFA818 /* BACollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466FDF8287D3B1F00AFA818 /* BACollectionViewCell.swift */; };
+		646B1709287E88BF00A79A66 /* MonthlyExpensesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646B1708287E88BF00A79A66 /* MonthlyExpensesCell.swift */; };
+		646B170B287E8AD800A79A66 /* BAOtherCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646B170A287E8AD800A79A66 /* BAOtherCollectionView.swift */; };
+		646B170D287EAEE600A79A66 /* BATopThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646B170C287EAEE600A79A66 /* BATopThirdView.swift */; };
+		646F0F7E287DC616009970CF /* BACVCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646F0F7D287DC616009970CF /* BACVCellView.swift */; };
 		64C721C9287D8EFA005E28BB /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C721C8287D8EFA005E28BB /* CategoryCell.swift */; };
 		64C721CD287D9BF8005E28BB /* BACollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C721CC287D9BF8005E28BB /* BACollectionView.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +51,10 @@
 		644BB6A22879862F00FDAC0D /* BAView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BAView.swift; sourceTree = "<group>"; };
 		644BB6A32879862F00FDAC0D /* BAButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BAButton.swift; sourceTree = "<group>"; };
 		6466FDF8287D3B1F00AFA818 /* BACollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BACollectionViewCell.swift; sourceTree = "<group>"; };
+		646B1708287E88BF00A79A66 /* MonthlyExpensesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthlyExpensesCell.swift; sourceTree = "<group>"; };
+		646B170A287E8AD800A79A66 /* BAOtherCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAOtherCollectionView.swift; sourceTree = "<group>"; };
+		646B170C287EAEE600A79A66 /* BATopThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BATopThirdView.swift; sourceTree = "<group>"; };
+		646F0F7D287DC616009970CF /* BACVCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BACVCellView.swift; sourceTree = "<group>"; };
 		64C721C8287D8EFA005E28BB /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		64C721CC287D9BF8005E28BB /* BACollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BACollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,7 +143,9 @@
 		644BB6A02879862F00FDAC0D /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				646B170C287EAEE600A79A66 /* BATopThirdView.swift */,
 				64C721CC287D9BF8005E28BB /* BACollectionView.swift */,
+				646B170A287E8AD800A79A66 /* BAOtherCollectionView.swift */,
 				644BB6A12879862F00FDAC0D /* BALabel.swift */,
 				644BB6A22879862F00FDAC0D /* BAView.swift */,
 				644BB6A32879862F00FDAC0D /* BAButton.swift */,
@@ -147,8 +157,10 @@
 		6466FDF7287D3AD900AFA818 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				646B1708287E88BF00A79A66 /* MonthlyExpensesCell.swift */,
 				64C721C8287D8EFA005E28BB /* CategoryCell.swift */,
 				6466FDF8287D3B1F00AFA818 /* BACollectionViewCell.swift */,
+				646F0F7D287DC616009970CF /* BACVCellView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -231,8 +243,11 @@
 			files = (
 				310A6E5E28797B45005A9E6A /* SecondViewController.swift in Sources */,
 				310A6E6028797B4E005A9E6A /* ThirdViewController.swift in Sources */,
+				646F0F7E287DC616009970CF /* BACVCellView.swift in Sources */,
+				646B170D287EAEE600A79A66 /* BATopThirdView.swift in Sources */,
 				310B00A3287832A400A3BC17 /* FirstViewController.swift in Sources */,
 				310B009F287832A400A3BC17 /* AppDelegate.swift in Sources */,
+				646B170B287E8AD800A79A66 /* BAOtherCollectionView.swift in Sources */,
 				6466FDF9287D3B1F00AFA818 /* BACollectionViewCell.swift in Sources */,
 				644BB6A62879862F00FDAC0D /* BAButton.swift in Sources */,
 				644BB6A42879862F00FDAC0D /* BALabel.swift in Sources */,
@@ -244,6 +259,7 @@
 				310B00B52878330400A3BC17 /* Model.swift in Sources */,
 				310A6E6228797B93005A9E6A /* TabBarViewController.swift in Sources */,
 				644BB6982878799100FDAC0D /* MyBankView.swift in Sources */,
+				646B1709287E88BF00A79A66 /* MonthlyExpensesCell.swift in Sources */,
 				64C721C9287D8EFA005E28BB /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +399,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 43H9FSJ7L6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BudgetingApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Jusan;
@@ -410,6 +427,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 43H9FSJ7L6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BudgetingApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Jusan;

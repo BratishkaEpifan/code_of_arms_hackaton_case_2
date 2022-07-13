@@ -1,5 +1,5 @@
 //
-//  BACollectionViewCell.swift
+//  BACVCellView.swift
 //  BudgetingApp
 //
 //  Created by Aidyn Assan on 12.07.2022.
@@ -7,26 +7,24 @@
 
 import UIKit
 
-class BACollectionViewCell: UICollectionViewCell {
-	
-	static let cellID = "cellID"
-	
+class BACVCellView: UIView {
+
 	let sectionImageView = UIImageView()
 	let sectionTitleLabel = UILabel()
 	let sectionBonusLabel = UILabel()
 	
 	func setup(_ category: Category) {
 		sectionTitleLabel.text = category.name
-		sectionBonusLabel.text = "+\(category.expense) B"
+		sectionBonusLabel.text = "\(category.expense) ₸"
 		let image = UIImage(systemName: category.imageName)
 		sectionImageView.image = image
 		sectionImageView.tintColor = category.color
-		sectionBonusLabel.textColor = .systemGreen
+		sectionBonusLabel.textColor = UIColor(named: "orange")
 	}
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-		backgroundColor = .white
+		translatesAutoresizingMaskIntoConstraints = false
 		configure()
 	}
 	

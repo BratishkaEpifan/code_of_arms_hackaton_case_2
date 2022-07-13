@@ -1,19 +1,18 @@
 //
-//  BACollectionView.swift
+//  BAOtherCollectionView.swift
 //  BudgetingApp
 //
-//  Created by Aidyn Assan on 12.07.2022.
+//  Created by Aidyn Assan on 13.07.2022.
 //
 
 import UIKit
 
-class BACollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
+class BAOtherCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
 	
 	let collectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
-		layout.sectionInset = UIEdgeInsets(top: 2, left: 12, bottom: 2, right: 5)
-		layout.itemSize = CGSize(width: 90, height: 100)
-		layout.scrollDirection = .horizontal
+		layout.sectionInset = UIEdgeInsets(top: 2, left: 30, bottom: 15, right: 30)
+		layout.itemSize = CGSize(width: 150, height: 180)
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		return collectionView
@@ -30,7 +29,6 @@ class BACollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	
 	func configure() {
 		addSubview(collectionView)
 		collectionView.backgroundColor = .systemGray6
@@ -39,6 +37,7 @@ class BACollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
 		collectionView.delegate = self
 		collectionView.register(BACollectionViewCell.self,
 								forCellWithReuseIdentifier: BACollectionViewCell.cellID)
+		
 		NSLayoutConstraint.activate([
 			collectionView.topAnchor.constraint(equalTo: topAnchor),
 			collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -46,7 +45,9 @@ class BACollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
 			collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
 		])
 	}
-
+	
+	
+	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		Category.categories.count
 	}
