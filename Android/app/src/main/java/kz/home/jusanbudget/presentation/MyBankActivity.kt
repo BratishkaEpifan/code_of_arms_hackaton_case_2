@@ -23,9 +23,5 @@ class MyBankActivity : AppCompatActivity() {
             val intent = Intent(this, BudgetActivity::class.java)
             startActivity(intent)
         }
-
-        //viewModel.register()
-        viewModel.authorization()
-
     }
 }

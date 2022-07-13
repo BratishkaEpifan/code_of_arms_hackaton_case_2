@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kz.home.jusanbudget.data.GamesResponse
 import kz.home.jusanbudget.domain.Repository
 
 class NewViewModel(
@@ -18,5 +19,13 @@ class NewViewModel(
             x = repository.getBonus()
         }
         return x
+    }
+
+    fun getGames(): GamesResponse {
+        var c = GamesResponse(1,1, 1)
+        viewModelScope.launch(ioDispatcher) {
+            c = repository.getGames()
+        }
+        return c
     }
 }

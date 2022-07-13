@@ -19,7 +19,7 @@ class CategoriesAdapter() :
             binding.tvMyBonuses.text = item.bonuses.toString()
             binding.tvPossibleBonuses.text = item.possibleBonus.toString()
             binding.ivCategoryIcon.setImageResource(item.img)
-            binding.tvCategoryBonus.text = item.percent.toString()
+            binding.tvCategoryBonus.text = item.maxPercent.toString()
         }
     }
 

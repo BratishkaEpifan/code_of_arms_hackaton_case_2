@@ -15,9 +15,9 @@ class MyCategoriesAdapter() : ListAdapter<Category, MyCategoriesAdapter.MyCatego
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Category) {
             binding.tvCategoryName.text = item.name
-            binding.tvPossibleBonuses.text = item.possibleBonus.toString()
+            binding.tvPossibleBonuses.text = item.bonuses.toString()
             binding.ivCategoryIcon.setImageResource(item.img)
-            binding.tvCategoryBonus.text = item.percent.toString()
+            binding.tvCategoryBonus.text = item.maxPercent.toString()
         }
     }
 

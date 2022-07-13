@@ -11,6 +11,8 @@ import kz.home.jusanbudget.databinding.FragmentNewBinding
 import kz.home.jusanbudget.domain.CategoryDaniyar
 import kz.home.jusanbudget.presentation.expenses.ExpensesViewModel
 import kz.home.jusanbudget.utils.categories
+import kz.home.jusanbudget.utils.myCategories
+import kz.home.jusanbudget.utils.otherCategories
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewFragment : Fragment() {
@@ -34,15 +36,13 @@ class NewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Log.e("", viewModel.getAllBonus())
-
         val adapter = CategoriesAdapter()
         binding.rvAllCategories.adapter = adapter
-        adapter.submitList(categories)
+        adapter.submitList(otherCategories)
 
         val secondAdapter = MyCategoriesAdapter()
         binding.rvMyCategories.adapter = secondAdapter
-        secondAdapter.submitList(categories)
+        secondAdapter.submitList(myCategories)
     }
 
     override fun onDestroyView() {

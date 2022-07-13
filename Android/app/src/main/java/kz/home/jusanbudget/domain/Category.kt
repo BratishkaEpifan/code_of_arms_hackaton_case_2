@@ -6,7 +6,8 @@ import androidx.annotation.DrawableRes
 data class Category(
     val id: Int,
     val name: String,
-    val percent: Int,
+    val defaultPercent: Int,
+    val maxPercent: Int,
     @DrawableRes val img: Int,
     var spent: Float,
     var bonuses: Float,
