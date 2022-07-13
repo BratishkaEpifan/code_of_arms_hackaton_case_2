@@ -28,7 +28,7 @@ class MyBankViewModel(
     fun register() {
         viewModelScope.launch(ioDispatcher) {
             //repository.authUser(AuthenticationRequest(login, password))
-            repository.registerUser(AuthenticationRequest("test", "123"))
+            //repository.registerUser(AuthenticationRequest("test", "123"))
             //Log.e("", repository.getBonus())
         }
     }

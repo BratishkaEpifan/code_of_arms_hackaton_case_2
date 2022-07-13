@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.home.jusanbudget.domain.Category
+import kz.home.jusanbudget.domain.CategoryDaniyar
 
 class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var data = mutableListOf<Category>()

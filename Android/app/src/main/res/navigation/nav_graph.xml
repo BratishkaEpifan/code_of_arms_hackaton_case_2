@@ -12,12 +12,12 @@
         tools:layout="@layout/fragment_expenses" />
     <fragment
         android:id="@+id/futureFragment"
-        android:name="kz.home.jusanbudget.presentation.FutureFragment"
+        android:name="kz.home.jusanbudget.presentation.analytics.FutureFragment"
         android:label="FutureFragment"
         tools:layout="@layout/fragment_future" />
     <fragment
         android:id="@+id/newFragment"
-        android:name="kz.home.jusanbudget.presentation.NewFragment"
+        android:name="kz.home.jusanbudget.presentation.bonusCategories.NewFragment"
         android:label="NewFragment"
         tools:layout="@layout/fragment_new" />
 </navigation>

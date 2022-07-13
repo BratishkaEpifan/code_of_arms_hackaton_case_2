@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kz.home.jusanbudget.R
 import kz.home.jusanbudget.domain.Category
+import kz.home.jusanbudget.domain.CategoryDaniyar
 
 class CategoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_category, parent, false)) {
