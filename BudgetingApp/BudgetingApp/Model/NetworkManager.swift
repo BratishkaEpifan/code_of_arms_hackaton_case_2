@@ -92,4 +92,69 @@ class NetworkManager {
             
         }.resume()
     }
+    
+    func getBonus(path: String, completion: @escaping (Result<Double, NetworkError>) -> Void) {
+        guard let url = URL(string: "http://localhost:8080/user/\(path)") else {
+            DispatchQueue.main.async {
+                completion(.failure(.invalidURL))
+            }
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                DispatchQueue.main.async {
+                    completion(.failure(.noData))
+                }
+                return
+            }
+            
+            guard let purchases = try? JSONDecoder().decode(Double.self, from: data) else {
+                DispatchQueue.main.async {
+                    completion(.failure(.decodingError))
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completion(.success(purchases))
+            }
+            
+        }.resume()
+    }
+    
+    func getCategories(path: String, completion: @escaping (Result<[String], NetworkError>) -> Void) {
+        guard let url = URL(string: "http://localhost:8080/user/\(path)") else {
+            DispatchQueue.main.async {
+                completion(.failure(.invalidURL))
+            }
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                DispatchQueue.main.async {
+                    completion(.failure(.noData))
+                }
+                return
+            }
+            
+            guard let purchases = try? JSONDecoder().decode([String].self, from: data) else {
+                DispatchQueue.main.async {
+                    completion(.failure(.decodingError))
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completion(.success(purchases))
+            }
+            
+        }.resume()
+    }
+    
 }

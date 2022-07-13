@@ -30,3 +30,46 @@ struct Category {
 	]
 //		.sorted(by: { $0.expense > $1.expense})
 }
+
+enum Categories: String{
+    case travel = "TRAVEL"
+    case fitness = "FITNESS"
+    case taxi = "TAXI"
+    case restaurants = "RESTAURANTS"
+    case furniture = "FURNITURE"
+    case medicine = "MEDICINE"
+    case clothes = "CLOTHES"
+    case beauty = "BEAUTY_AND_COSMETICS"
+    case games = "GAMES"
+    case cinema = "CINEMA_AND_MUSIC"
+    case noCat = "NONE"
+}
+
+struct MyFanctions {
+    static func returnCategories(cat: Categories) -> (String, String, String, String) {
+        switch cat {
+        case .travel:
+            return ("Путешествия", "airplane.circle.fill", "purple", "/travel")
+        case .fitness:
+            return ("Фитнес и SPA", "dumbbell.fill", "red", "/fitness")
+        case .taxi:
+            return ("Такси", "car.circle.fill", "orange", "/taxi")
+        case .restaurants:
+            return ("Кафе и рестораны", "fork.knife.circle.fill", "mellon", "/restaurants")
+        case .furniture:
+            return ("Мебель", "chair.lounge.fill", "corall", "/furniture")
+        case .medicine:
+            return ("Медицинские услуги", "pills.circle.fill", "salad", "/medicine")
+        case .clothes:
+            return ("Одежда и обувь", "bag.fill", "blue", "/clothes")
+        case .beauty:
+            return ("Салоны красоты и косметики", "sparkles", "yellow", "/beauty-and-cosmetics")
+        case .games:
+            return ("Игровые сервисы", "gamecontroller.fill", "berry", "/games")
+        case .cinema:
+            return ("Онлайн кино и музыка", "music.note.tv.fill", "azure", "/cinema-and-music")
+        case .noCat:
+            return ("Другое", "rays", "gray", "/no-category")
+        }
+    }
+}

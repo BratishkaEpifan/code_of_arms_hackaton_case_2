@@ -15,12 +15,18 @@ class BACollectionViewCell: UICollectionViewCell {
 	let sectionTitleLabel = UILabel()
 	let sectionBonusLabel = UILabel()
 	
-	func setup(_ category: Category) {
-		sectionTitleLabel.text = category.name
-		sectionBonusLabel.text = "+\(category.expense) B"
-		let image = UIImage(systemName: category.imageName)
+    func setup(_ category: (String, String, String, String)) {
+        sectionTitleLabel.text = category.0
+        NetworkManager.shared.getPurchases(path: category.3) { [weak self] result in
+            switch result {
+            case .success(let cat): self?.sectionBonusLabel.text = "\(Double(Int(100*cat.potentialBonus))/100) B"
+            case .failure(_): print("Error occured")
+            }
+        }
+//		sectionBonusLabel.text = "+\(category.expense) B"
+        let image = UIImage(systemName: category.1)
 		sectionImageView.image = image
-		sectionImageView.tintColor = category.color
+		sectionImageView.tintColor = UIColor(named: category.2)
 		sectionBonusLabel.textColor = .systemGreen
 	}
 	
