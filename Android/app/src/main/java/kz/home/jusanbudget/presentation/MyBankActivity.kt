@@ -24,7 +24,8 @@ class MyBankActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        viewModel.authorization()
+        //viewModel.register()
+        //viewModel.authorization()
 
     }
 }
