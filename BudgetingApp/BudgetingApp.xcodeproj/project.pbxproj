@@ -16,7 +16,8 @@
 		310B00A8287832A500A3BC17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 310B00A7287832A500A3BC17 /* Assets.xcassets */; };
 		310B00AB287832A500A3BC17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 310B00A9287832A500A3BC17 /* LaunchScreen.storyboard */; };
 		310B00B52878330400A3BC17 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B00B42878330400A3BC17 /* Model.swift */; };
-		642F6D06287C27B300EA125C /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 642F6D05287C27B300EA125C /* Charts */; };
+		59D20168287ED32F00585989 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 59D20167287ED32F00585989 /* Charts */; };
+		59D2016A287EDAEA00585989 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D20169287EDAEA00585989 /* NetworkManager.swift */; };
 		644BB6942878448200FDAC0D /* MyBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB6932878448200FDAC0D /* MyBankViewController.swift */; };
 		644BB69628785F4900FDAC0D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB69528785F4900FDAC0D /* InfoView.swift */; };
 		644BB6982878799100FDAC0D /* MyBankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BB6972878799100FDAC0D /* MyBankView.swift */; };
@@ -44,6 +45,7 @@
 		310B00AA287832A500A3BC17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		310B00AC287832A500A3BC17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		310B00B42878330400A3BC17 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		59D20169287EDAEA00585989 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		644BB6932878448200FDAC0D /* MyBankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBankViewController.swift; sourceTree = "<group>"; };
 		644BB69528785F4900FDAC0D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		644BB6972878799100FDAC0D /* MyBankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBankView.swift; sourceTree = "<group>"; };
@@ -64,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				642F6D06287C27B300EA125C /* Charts in Frameworks */,
+				59D20168287ED32F00585989 /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				310B00B42878330400A3BC17 /* Model.swift */,
+				59D20169287EDAEA00585989 /* NetworkManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -182,7 +185,7 @@
 			);
 			name = BudgetingApp;
 			packageProductDependencies = (
-				642F6D05287C27B300EA125C /* Charts */,
+				59D20167287ED32F00585989 /* Charts */,
 			);
 			productName = BudgetingApp;
 			productReference = 310B009B287832A400A3BC17 /* BudgetingApp.app */;
@@ -214,6 +217,7 @@
 			mainGroup = 310B0092287832A400A3BC17;
 			packageReferences = (
 				642F6D04287C27B300EA125C /* XCRemoteSwiftPackageReference "Charts" */,
+				59D20166287ED32F00585989 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 310B009C287832A400A3BC17 /* Products */;
 			projectDirPath = "";
@@ -244,6 +248,7 @@
 				310A6E5E28797B45005A9E6A /* SecondViewController.swift in Sources */,
 				310A6E6028797B4E005A9E6A /* ThirdViewController.swift in Sources */,
 				646F0F7E287DC616009970CF /* BACVCellView.swift in Sources */,
+				59D2016A287EDAEA00585989 /* NetworkManager.swift in Sources */,
 				646B170D287EAEE600A79A66 /* BATopThirdView.swift in Sources */,
 				310B00A3287832A400A3BC17 /* FirstViewController.swift in Sources */,
 				310B009F287832A400A3BC17 /* AppDelegate.swift in Sources */,
@@ -472,6 +477,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		59D20166287ED32F00585989 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		642F6D04287C27B300EA125C /* XCRemoteSwiftPackageReference "Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/danielgindi/Charts";
@@ -483,7 +496,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		642F6D05287C27B300EA125C /* Charts */ = {
+		59D20167287ED32F00585989 /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 642F6D04287C27B300EA125C /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;

@@ -10,8 +10,8 @@ import UIKit
 struct Category {
 	let name: String
 	let imageName: String
-	let expense: Double
-	let bonus: Double
+	var expense: Double
+	var bonus: Double
 	let color: UIColor
 	
 	static var categories: [Category] = [
