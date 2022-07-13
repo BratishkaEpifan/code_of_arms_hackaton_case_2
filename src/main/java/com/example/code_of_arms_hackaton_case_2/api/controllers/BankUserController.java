@@ -435,7 +435,7 @@ public class BankUserController {
         BankUser bankUser = getClientFromServletRequest(httpServletRequest);
         BonusCountEntity bonusCountEntity = bankUser.getBonusCountEntity();
         BonusResponseEntity result = new BonusResponseEntity();
-        result.setExpenditure(bonusCountEntity.getTotalExpenditure());
+        result.setExpenditure(bonusCountEntity.getNoCategoryExpenditure());
         result.setBonus(bonusCountEntity.getNoCategoryBonus());
         result.setPotentialBonus(bonusCountEntity.getNoCategoryBonus());
         return ResponseEntity.status(HttpStatus.OK).body(result);
