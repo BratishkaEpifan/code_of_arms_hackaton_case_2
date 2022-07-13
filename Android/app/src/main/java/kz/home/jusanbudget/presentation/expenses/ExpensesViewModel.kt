@@ -5,13 +5,28 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kz.home.jusanbudget.data.GamesResponse
+import kotlinx.coroutines.runBlocking
+import kz.home.jusanbudget.data.AuthenticationRequest
+import kz.home.jusanbudget.data.login
+import kz.home.jusanbudget.data.password
 import kz.home.jusanbudget.domain.Repository
 
 class ExpensesViewModel(
     private val repository: Repository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
+
+    fun authorization() {
+        val job = viewModelScope.launch(ioDispatcher) {
+            repository.authUser(AuthenticationRequest(login, password))
+        }
+
+        runBlocking {
+            job.join()
+        }
+
+        //Log.e("", getAllBonus())
+    }
 
     fun getAllBonus(): String {
         var x = ""
@@ -21,11 +36,18 @@ class ExpensesViewModel(
         return x
     }
 
-    fun getGames(): GamesResponse{
-        var c = GamesResponse(1,1, 1)
+    /*fun getGames(): GamesResponse{
+        var c
         viewModelScope.launch(ioDispatcher) {
-            c = repository.getGames()
+            val c = repository.getGames()
         }
-        return c
+        return
+    }*/
+
+    fun register() {
+        viewModelScope.launch(ioDispatcher) {
+            repository.registerUser(AuthenticationRequest(login, password))
+        }
     }
+
 }

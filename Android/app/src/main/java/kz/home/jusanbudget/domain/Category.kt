@@ -4,14 +4,13 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 
 data class Category(
-    val id: Int,
-    val name: String,
-    val defaultPercent: Int,
-    val maxPercent: Int,
-    @DrawableRes val img: Int,
-    var spent: Float,
-    var bonuses: Float,
-    var possibleBonus: Float,
-    @ColorRes var color: Int,
-    var proportions: Float
+    val id: Int = 1,
+    val name: String = "",
+    val percent: Int = 1,
+    @DrawableRes val img: Int = 1,
+    var spent: Float = 1f,
+    var bonuses: Float = 1f,
+    var possibleBonus: Float=1f,
+    @ColorRes var color: Int =1,
+    var proportions: Float=1f
 )

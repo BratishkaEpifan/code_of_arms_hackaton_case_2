@@ -17,12 +17,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewFragment : Fragment() {
 
-    private val viewModel: ExpensesViewModel by viewModel()
     private var idCounter = 0
     private var _binding: FragmentNewBinding? = null
     private val binding get() = _binding!!
-    private val category =
-        CategoryDaniyar(idCounter++, "Travel", "+500₸", "500₸", R.drawable.beauty, "20% bonuses")
 
     override fun onCreateView(
         inflater: LayoutInflater,

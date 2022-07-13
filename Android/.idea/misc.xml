@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.27974568574023617" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2185" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/apps_icon.xml" value="0.1615" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/drawable/bar_chart_icon.xml" value="0.1615" />
@@ -33,6 +34,16 @@
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.253125" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/menu/main_menu.xml" value="0.253125" />
         <entry key="..\:/Users/tomir/code_of_arms_hackaton_case_2/Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2185" />
+        <entry key="app/src/main/res/drawable/circle_button.xml" value="0.2645" />
+        <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.23369565217391305" />
+        <entry key="app/src/main/res/layout/fragment_expenses.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layout/fragment_future.xml" value="0.3395212809244793" />
+        <entry key="app/src/main/res/layout/fragment_new.xml" value="0.43338114420572915" />
+        <entry key="app/src/main/res/layout/item_all_categories_rv.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layout/item_category.xml" value="0.7802874743326489" />
+        <entry key="app/src/main/res/layout/item_my_categories_rv.xml" value="0.15572916666666667" />
+        <entry key="app/src/main/res/layout/item_second_page_rv.xml" value="0.4104442430579144" />
+        <entry key="app/src/main/res/layout/new_category_bottom_sheet.xml" value="0.29509396760360057" />
       </map>
     </option>
   </component>

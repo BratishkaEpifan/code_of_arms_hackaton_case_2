@@ -25,23 +25,26 @@ import kz.home.jusanbudget.utils.categories
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ExpensesFragment : Fragment(R.layout.fragment_expenses), OnChartValueSelectedListener {
+
     private val viewModel: ExpensesViewModel by viewModel()
     private lateinit var chart: PieChart
     private lateinit var recyclerView: RecyclerView
     private lateinit var categoryManager: LinearLayoutManager
-    var allSpentSum = 0F
-    var allBonusSum = 0F
-    var allPossibleBonusSum = 0F
+    var sum = 0F
+    var bonus = 0F
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //viewModel.register()
+        //viewModel.authorization()
+        //Log.e("", viewModel.getAllBonus())
+
         val categoryAdapter = setupRecyclerView(view)
         categoryAdapter.setItems(categories)
 
-        allSpentSum = 0F
-        allBonusSum = 0F
-        allPossibleBonusSum = 0F
+        sum = 0F
+        bonus = 0F
         calculateProportions()
         setupChart(view)
         chart.animateX(1000)
@@ -75,19 +78,19 @@ class ExpensesFragment : Fragment(R.layout.fragment_expenses), OnChartValueSelec
 
     private fun calculateProportions() {
         for(i in categories.indices) {
-            allSpentSum += categories[i].spent
-            allBonusSum += categories[i].bonuses
-            allPossibleBonusSum += categories[i].possibleBonus
+            sum += categories[i].spent
+            bonus += categories[i].bonuses
         }
-        Log.e("", allPossibleBonusSum.toString())
 
         for(i in categories.indices) {
-            categories[i].proportions = categories[i].spent / allSpentSum * 100
+            categories[i].proportions = categories[i].spent / sum * 100
         }
     }
 
     private fun generateCenterText() : SpannableString {
-        val s = SpannableString("$allSpentSum ₸ \n${allBonusSum} Б")
+        val s = SpannableString("$sum ₸ \n${bonus
+            //viewModel.getBonus()
+        } Б")
         s.setSpan(RelativeSizeSpan(2f), 0, 8, 0)
         s.setSpan(ForegroundColorSpan(Color.GRAY), 8, s.length, 0)
         return s
