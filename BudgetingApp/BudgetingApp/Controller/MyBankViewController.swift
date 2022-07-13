@@ -9,13 +9,19 @@ import UIKit
 
 class MyBankViewController: UIViewController, GoToAppDelegate {
 
+    private var networkManager = NetworkManager.shared
+    let username = "Olzhas"
+    let password = "123"
+    
 	let myBankView = MyBankView()
+    
 		
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = .systemBackground
 		configureNC()
 		configure()
+        networkManager.auth(username: username, password: password)
 	}
 
 	func configureNC() {

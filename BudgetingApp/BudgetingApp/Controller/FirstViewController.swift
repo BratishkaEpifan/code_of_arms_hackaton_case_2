@@ -9,126 +9,274 @@ import UIKit
 import Charts
 
 class FirstViewController: UIViewController {
-	
-	let viewChart = UIView()
-	let expensesChart = PieChartView()
-	let expensesTable = UITableView()
+    
+    private var networkManager = NetworkManager.shared
+    
+    private let backgroundViewForChart: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 50
+        return view
+    }()
+    private let expensesChart: PieChartView = {
+        let chart = PieChartView()
+        chart.animate(yAxisDuration: 1.5, easingOption: .easeInOutQuad)
+        return chart
+    }()
+    private let expensesTable: UITableView = {
+        let table = UITableView()
+        table.layer.cornerRadius = 30
+        table.showsVerticalScrollIndicator = false
+        return table
+    }()
 
-	var categories: [Category] = [
-		Category(name: "Фитнес и SPA", imageName: "dumbbell.fill", expense: 12023, bonus: 213.2, color: UIColor(named: "red")!),
-		Category(name: "Такси", imageName: "car.circle.fill", expense: 23214, bonus: 534.5, color: UIColor(named: "orange")!),
-		Category(name: "Салоны красоты и косметики", imageName: "sparkles", expense: 12992, bonus: 439.9, color: UIColor(named: "yellow")!),
-		Category(name: "Кафе и рестораны", imageName: "fork.knife.circle.fill", expense: 44121, bonus: 4221.6, color: UIColor(named: "mellon")!),
-		Category(name: "Медицинские услуги", imageName: "pills.circle.fill", expense: 10023, bonus: 992.2, color: UIColor(named: "salad")!),
-		Category(name: "Онлайн кино и музыка", imageName: "music.note.tv.fill", expense: 5933, bonus: 213.1, color: UIColor(named: "azure")!),
-		Category(name: "Одежда и обувь", imageName: "bag.fill", expense: 65212, bonus: 5322.1, color: UIColor(named: "blue")!),
-		Category(name: "Игровые сервисы", imageName: "gamecontroller.fill", expense: 6432, bonus: 12.43, color: UIColor(named: "berry")!),
-		Category(name: "Путешествия", imageName: "airplane.circle.fill",
-				 expense: 14999, bonus: 123.4, color: UIColor(named: "purple")!),
-		Category(name: "Мебель", imageName: "chair.lounge.fill", expense: 12324, bonus: 231.1, color: UIColor(named: "corall")!),
-		Category(name: "Другое", imageName: "rays", expense: 31321, bonus: 213.28, color: .systemGray3)
+    var categories: [Category] = []
+    let totalExpensesString = "120,000 тг"
+    let bonusString = "1,578 бонусов"
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemGray6
+        loadCategories()
+        makeConstraints()
+        configureTable()
+    }
 
-	]
-	
-	let totalExpensesString = "Ваши Расходы\n    120,000 тг"
-	let bonusString = "1,578 бонусов"
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		view.backgroundColor = .systemGray6
-		
-		makeConstraints()
-		loadCategories()
-		sortByExpense()
-		configureChart()
-		expensesTable.dataSource = self
-		expensesTable.delegate = self
-		expensesTable.register(CategoryCell.self, forCellReuseIdentifier: "categoryCell")
-	}
-	
-	func sortByExpense() {
-		categories = categories.sorted(by: { $0.expense > $1.expense })
-	}
-	
-	func loadCategories() {
-		
-	}
-	
-	func configureChart() {
-		var dataEntries: [PieChartDataEntry] = []
-		var colors: [UIColor] = []
-		
-		for index in 0..<categories.count {
-			let entry = PieChartDataEntry(value: categories[index].expense)
-			dataEntries.append(entry)
-			colors.append(categories[index].color)
-		}
-		
-		let pieChartDataSet = PieChartDataSet(entries: dataEntries)
-		pieChartDataSet.colors = colors
-		pieChartDataSet.drawValuesEnabled = false
-		
-		expensesChart.data = PieChartData(dataSet: pieChartDataSet)
-		
-		let expensesAttribute = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20) ]
-		expensesChart.centerAttributedText = NSAttributedString(string: totalExpensesString, attributes: expensesAttribute)
-		
-		expensesChart.legend.enabled = false
-		expensesChart.delegate = self
-	}
-	
-	func makeConstraints() {
-		view.addSubview(viewChart)
-		viewChart.translatesAutoresizingMaskIntoConstraints = false
-		viewChart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-		viewChart.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-		viewChart.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-		viewChart.heightAnchor.constraint(equalToConstant: 350).isActive = true
-		viewChart.backgroundColor = .white
-		viewChart.layer.cornerRadius = 50
-		
-		viewChart.addSubview(expensesChart)
-		expensesChart.translatesAutoresizingMaskIntoConstraints = false
-		expensesChart.topAnchor.constraint(equalTo: viewChart.topAnchor).isActive = true
-		expensesChart.leadingAnchor.constraint(equalTo: viewChart.leadingAnchor).isActive = true
-		expensesChart.trailingAnchor.constraint(equalTo: viewChart.trailingAnchor).isActive = true
-		expensesChart.heightAnchor.constraint(equalToConstant: 350).isActive = true
-		expensesChart.animate(yAxisDuration: 1.5, easingOption: .easeInOutQuad)
+    private func loadCategories() {
+        loadTravelCategory()
+        loadTaxiCategory()
+        loadRestaurantsCategory()
+        loadOthersCategory()
+        loadMedicineCategory()
+        loadGamesCategory()
+        loadFurnitureCategory()
+        loadFitnessCategory()
+        loadClothesCategory()
+        loadCinemaMusicCategory()
+        loadBeautyCategory()
+    }
+    
+    private func sortByDecreaseExpenses() {
+        categories = categories.sorted(by: { $0.expense > $1.expense })
+    }
+    
+    private func configureTable() {
+        expensesTable.dataSource = self
+        expensesTable.delegate = self
+        expensesTable.register(CategoryCell.self, forCellReuseIdentifier: "categoryCell")
+    }
+    
+    private func configureChart() {
+        var dataEntries: [PieChartDataEntry] = []
+        var colors: [UIColor] = []
+        
+        for index in 0..<categories.count {
+            let entry = PieChartDataEntry(value: categories[index].expense)
+            dataEntries.append(entry)
+            colors.append(categories[index].color)
+        }
+        
+        let pieChartDataSet = PieChartDataSet(entries: dataEntries)
+        pieChartDataSet.colors = colors
+        pieChartDataSet.drawValuesEnabled = false
+        
+        expensesChart.data = PieChartData(dataSet: pieChartDataSet)
+        
+        let expensesAttribute = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20) ]
+        expensesChart.centerAttributedText = NSAttributedString(string: totalExpensesString, attributes: expensesAttribute)
+        
+        expensesChart.legend.enabled = false
+        expensesChart.delegate = self
+    }
+    
+    private func makeConstraints() {
+        view.addSubview(backgroundViewForChart)
+        backgroundViewForChart.translatesAutoresizingMaskIntoConstraints = false
+        backgroundViewForChart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        backgroundViewForChart.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        backgroundViewForChart.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        backgroundViewForChart.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        
+        backgroundViewForChart.addSubview(expensesChart)
+        expensesChart.translatesAutoresizingMaskIntoConstraints = false
+        expensesChart.topAnchor.constraint(equalTo: backgroundViewForChart.topAnchor).isActive = true
+        expensesChart.leadingAnchor.constraint(equalTo: backgroundViewForChart.leadingAnchor).isActive = true
+        expensesChart.trailingAnchor.constraint(equalTo: backgroundViewForChart.trailingAnchor).isActive = true
+        expensesChart.heightAnchor.constraint(equalToConstant: 350).isActive = true
 
-		view.addSubview(expensesTable)
-		expensesTable.translatesAutoresizingMaskIntoConstraints = false
-		expensesTable.topAnchor.constraint(equalTo: viewChart.bottomAnchor, constant: 16).isActive = true
-		expensesTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-		expensesTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-		expensesTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-		expensesTable.layer.cornerRadius = 30
-		expensesTable.showsVerticalScrollIndicator = false
-	}
-	
+        view.addSubview(expensesTable)
+        expensesTable.translatesAutoresizingMaskIntoConstraints = false
+        expensesTable.topAnchor.constraint(equalTo: backgroundViewForChart.bottomAnchor, constant: 16).isActive = true
+        expensesTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        expensesTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        expensesTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+    }
+    
 }
-
+// MARK: - TableView Delegates
 extension FirstViewController: UITableViewDataSource, UITableViewDelegate {
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		categories.count
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryCell
-		cell.assignParameters(categories[indexPath.row])
-		let backgroundView = UIView()
-		backgroundView.backgroundColor = UIColor.systemGray5
-		cell.selectedBackgroundView = backgroundView
-		return cell
-	}
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		expensesChart.highlightValue(Highlight(x: Double(indexPath.row), dataSetIndex: 0, stackIndex: 0))
-	}
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        categories.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryCell
+        cell.assignParameters(categories[indexPath.row])
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.systemGray5
+        cell.selectedBackgroundView = backgroundView
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        expensesChart.highlightValue(Highlight(x: Double(indexPath.row), dataSetIndex: 0, stackIndex: 0))
+    }
 }
 
+// MARK: - CharView Delegate
 extension FirstViewController: ChartViewDelegate {
-	func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-		let index = Int(highlight.x)
-		expensesTable.selectRow(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .middle)
-	}
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        let index = Int(highlight.x)
+        expensesTable.selectRow(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .middle)
+    }
 }
+
+// MARK: - Network requests
+extension FirstViewController {
+    func loadTravelCategory() {
+        networkManager.getPurchases(path: "/travel") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Путешествия", imageName: "airplane.circle.fill", expense: purchases.expenditure, bonus: purchases.bonus, color: UIColor(named: "purple")!)
+                self.categories.append(category)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadTaxiCategory() {
+        networkManager.getPurchases(path: "/taxi") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Такси", imageName: "car.circle.fill", expense: purchases.expenditure, bonus: purchases.bonus, color: UIColor(named: "orange")!)
+                self.categories.append(category)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadRestaurantsCategory() {
+        networkManager.getPurchases(path: "/restaurants") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Кафе и рестораны", imageName: "fork.knife.circle.fill", expense: purchases.expenditure, bonus: purchases.bonus, color: UIColor(named: "mellon")!)
+                self.categories.append(category)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadOthersCategory() {
+        networkManager.getPurchases(path: "/no-category") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Другое", imageName: "rays", expense: purchases.expenditure, bonus: purchases.bonus, color: .systemGray3)
+                self.categories.append(category)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadMedicineCategory() {
+        networkManager.getPurchases(path: "/medicine") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Медицинские услуги", imageName: "pills.circle.fill", expense: purchases.expenditure, bonus: purchases.bonus, color: UIColor(named: "salad")!)
+                self.categories.append(category)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadGamesCategory() {
+        networkManager.getPurchases(path: "/games") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Игровые сервисы", imageName: "gamecontroller.fill", expense: purchases.expenditure, bonus: purchases.bonus, color: UIColor(named: "berry")!)
+                self.categories.append(category)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadFurnitureCategory() {
+        networkManager.getPurchases(path: "/furniture") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Мебель", imageName: "bed.double.circle.fill", expense: purchases.expenditure, bonus: purchases.bonus, color: UIColor(named: "corall")!)
+                self.categories.append(category)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadFitnessCategory() {
+        networkManager.getPurchases(path: "/fitness") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Фитнес и SPA", imageName: "figure.walk", expense: purchases.expenditure, bonus: purchases.bonus, color: UIColor(named: "red")!)
+                self.categories.append(category)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadClothesCategory() {
+        networkManager.getPurchases(path: "/clothes") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Одежда и обувь", imageName: "bag.fill", expense: purchases.expenditure, bonus: purchases.bonus, color: UIColor(named: "blue")!)
+                self.categories.append(category)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadCinemaMusicCategory() {
+        networkManager.getPurchases(path: "/cinema-and-music") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Онлайн кино и музыка", imageName: "music.note.tv.fill", expense: purchases.expenditure, bonus: purchases.bonus, color: UIColor(named: "azure")!)
+                self.categories.append(category)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadBeautyCategory() {
+        networkManager.getPurchases(path: "/beauty-and-cosmetics") { (result) in
+            switch result {
+            case .success(let purchases):
+                let category = Category(name: "Салоны красоты и косметики", imageName: "sparkles", expense: purchases.expenditure, bonus: purchases.bonus, color: UIColor(named: "yellow")!)
+                self.categories.append(category)
+                self.sortByDecreaseExpenses()
+                self.configureChart()
+                self.expensesTable.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+}
+

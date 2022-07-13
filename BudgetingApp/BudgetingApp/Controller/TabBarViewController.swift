@@ -8,14 +8,13 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
     
         configureTabBarItems()
     }
-    
     private func configureTabBarItems() {
 		tabBar.backgroundColor = .white
         self.tabBar.layer.borderWidth = 1.5
