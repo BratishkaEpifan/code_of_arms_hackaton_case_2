@@ -195,6 +195,8 @@ public class BonusCountEntityService {
         List<String> categories = getBestCombination(bankUser, bonusCountEntity);
         double result = 0.0;
 
+        result = result + bonusCountEntity.getNoCategoryBonus();
+
         if (categories.contains("BEAUTY_AND_COSMETICS")) {
             result = result + bonusCountEntity.getBeautyAndCosmeticsWithBonus();
         } else {
