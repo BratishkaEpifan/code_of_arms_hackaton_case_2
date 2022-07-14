@@ -31,7 +31,7 @@ class FirstViewController: UIViewController {
     }()
 
     var categories: [Category] = []
-    let totalExpensesString = "120,000 тг"
+    let totalExpensesString = "120 000 тг\n1 578 Б"
     let bonusString = "1,578 бонусов"
     
     override func viewDidLoad() {
@@ -40,6 +40,11 @@ class FirstViewController: UIViewController {
         loadCategories()
         makeConstraints()
         configureTable()
+        
+        categories = Category.categories
+        sortByDecreaseExpenses()
+        configureChart()
+        expensesTable.reloadData()
     }
 
     private func loadCategories() {
@@ -84,7 +89,6 @@ class FirstViewController: UIViewController {
         
         let expensesAttribute = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20) ]
         expensesChart.centerAttributedText = NSAttributedString(string: totalExpensesString, attributes: expensesAttribute)
-        
         expensesChart.legend.enabled = false
         expensesChart.delegate = self
     }
